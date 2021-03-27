@@ -6,6 +6,15 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(regWidget);
+    QWidget *w = new QWidget;
+    w->setLayout(layout);
+
+    setCentralWidget(w);
+
 }
 
 MainWindow::~MainWindow()
