@@ -5,6 +5,8 @@
 
 #include <QMainWindow>
 
+#include <QSql>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -19,6 +21,27 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    RegistrationWidget* regWidget = new RegistrationWidget;
+    RegistrationWidget* regWidget;
+
+    static bool createConnection(){
+        QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+        db.setDatabaseName("Diplom");
+        db.setUserName("admin");
+        db.setHostName("localhost");
+        db.setPassword("adminspassword1A!");
+
+        if(db.open()){
+            qDebug()<<"Error. Can't open database";
+            qDebug()<<db.lastError();
+            return false;
+        }
+
+        QStringList s = db.tables();
+
+        foreach(QString str, s){
+            qDebug()<<"Table " <<str;
+        }
+        return true;
+    }
 };
 #endif // MAINWINDOW_H

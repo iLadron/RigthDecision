@@ -1,8 +1,8 @@
-QT       += core gui qml widgets quickwidgets
+QT       += core gui qml widgets quickwidgets quick sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++11 debug_and_release
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -14,6 +14,8 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h
+
+MYSQL_PREFIX=/usr/lib/x86_64-linux-gnu/qt5/plugins
 
 FORMS += \
     mainwindow.ui

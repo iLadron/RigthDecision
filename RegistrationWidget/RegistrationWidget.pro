@@ -1,4 +1,4 @@
-QT += gui qml widgets quickwidgets
+QT += gui qml widgets quickwidgets quick sql
 
 TEMPLATE = lib
 DEFINES += REGISTRATIONWIDGET_LIBRARY

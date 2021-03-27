@@ -7,12 +7,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    createConnection();
+
+    regWidget = new RegistrationWidget();
 
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(regWidget);
     QWidget *w = new QWidget;
     w->setLayout(layout);
-
     setCentralWidget(w);
 
 }
