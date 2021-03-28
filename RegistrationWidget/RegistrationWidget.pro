@@ -29,4 +29,5 @@ RESOURCES += \
     qml.qrc
 
 DISTFILES += \
+    forms/LoginForm.qml \
     forms/RegistrationForm.qml

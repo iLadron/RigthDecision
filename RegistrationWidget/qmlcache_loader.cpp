@@ -9,6 +9,12 @@ namespace _forms_forms_RegistrationForm_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), nullptr, nullptr
     };
 }
+namespace _forms_forms_LoginForm_qml { 
+    extern const unsigned char qmlData[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), nullptr, nullptr
+    };
+}
 
 }
 namespace {
@@ -24,6 +30,7 @@ Q_GLOBAL_STATIC(Registry, unitRegistry)
 
 Registry::Registry() {
         resourcePathToCachedUnit.insert(QStringLiteral("/forms/forms/RegistrationForm.qml"), &QmlCacheGeneratedCode::_forms_forms_RegistrationForm_qml::unit);
+        resourcePathToCachedUnit.insert(QStringLiteral("/forms/forms/LoginForm.qml"), &QmlCacheGeneratedCode::_forms_forms_LoginForm_qml::unit);
     QQmlPrivate::RegisterQmlUnitCacheHook registration;
     registration.version = 0;
     registration.lookupCachedQmlUnit = &lookupCachedUnit;

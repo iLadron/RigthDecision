@@ -19,9 +19,8 @@ class REGISTRATIONWIDGET_EXPORT RegistrationWidget : public QWidget
     Q_OBJECT
 
 public slots:
-    void tryLogin(const QString& login, const QString& password){
-        qDebug()<<"log and pass " << login<<" "<<password;
-    }
+    bool tryLogin(const QString& login, const QString& password);
+    void openRegForm();
 
 signals:
     void isLoginSuccess(bool success);
@@ -31,6 +30,11 @@ public:
 
 private:
     //QSqlDatabase* m_db;
+
+    QQuickWidget *m_logWidget, *m_regWidget;
+    QVBoxLayout *m_mainLayout;
+    QQmlContext *m_logContext, *m_regContext;
+
 
 };
 

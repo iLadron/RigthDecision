@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/forms">
         <file>forms/RegistrationForm.qml</file>
+        <file>forms/LoginForm.qml</file>
     </qresource>
 </RCC>

@@ -13,12 +13,12 @@ Rectangle{
             color: "transparent"
             anchors.fill: parent
             border.width: 2
-            border.color: "red"
+            border.color: "blue"
         }
 
         anchors.centerIn: parent
         width: 300
-        height: 300
+        height: 500
 
 
         ColumnLayout{
@@ -29,32 +29,74 @@ Rectangle{
             spacing: 10
 
             TextField{
+                id:name
+                background: Rectangle{
+                    implicitWidth: reg.width
+                    implicitHeight:  reg.height/7 - 20
+                    color: "white"
+                }
+                placeholderText: "Name"
+            }
+
+            TextField{
+                id:surname
+                background: Rectangle{
+                    implicitWidth: reg.width
+                    implicitHeight:  reg.height/7 - 20
+                    color: "white"
+                }
+                placeholderText: "Surname"
+            }
+
+            TextField{
                 id:username
                 background: Rectangle{
                     implicitWidth: reg.width
-                    implicitHeight:  reg.height/5 - 20
+                    implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
-                placeholderText: "username"
+                placeholderText: "Username"
             }
+
+            TextField{
+                id:email
+                background: Rectangle{
+                    implicitWidth: reg.width
+                    implicitHeight:  reg.height/7 - 20
+                    color: "white"
+                }
+                placeholderText: "Email"
+            }
+
 
             TextField{
                 id:password
                 background: Rectangle{
                     implicitWidth: reg.width
-                    implicitHeight:  reg.height/5 - 20
+                    implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
                 placeholderText: "password"
             }
+
+            TextField{
+                id:secondPassword
+                background: Rectangle{
+                    implicitWidth: reg.width
+                    implicitHeight:  reg.height/7 - 20
+                    color: "white"
+                }
+                placeholderText: "second password"
+            }
+
             Rectangle{
                 id:button
                 width: parent.width
-                height: parent.height/5 - 20
+                height: parent.height/7 - 20
                 color: "green"
                 Label{
                     anchors.centerIn: parent
-                    text: "Login!"
+                    text: "Registration!!"
                     color: "white"
                 }
 
@@ -64,65 +106,12 @@ Rectangle{
                     anchors.fill: parent
                     onClicked: {
                         console.log(username.text + " " + password.text)
-                        registrationForm.tryLogin(username.text, password.text)
+                        //From.tryLogin(username.text, password.text)
 
                     }
                 }
             }
-            Rectangle{
-                id:newAccount
-                width: parent.width
-                height: parent.height/5 - 20
-                color: "white"
-                Item{
-                    anchors.centerIn:parent
-                    width: lblLeftNew.width+lblRightNew.width
-                    height: lblLeftNew.height
-                    Label{
-                        id:lblLeftNew
-                        text: "New here?"
-                        Layout.fillWidth: false
-                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                        color: "grey"
-                    }
 
-                    Label{
-                        id:lblRightNew
-                        anchors.left: lblLeftNew.right
-                        text: "  Create account!!"
-                        Layout.fillWidth: false
-                        color: "blue"
-                    }
-                }
-            }
-
-            Rectangle{
-                id:forget
-                width: parent.width
-                height: parent.height/5 - 20
-                color: "white"
-                Item{
-                    anchors.centerIn:parent
-                    width: lblLeftForget.width+lblRightForget.width
-                    height: lblLeftForget.height
-                    Label{
-                        id:lblLeftForget
-                        text: "Forget password?"
-                        Layout.fillWidth: false
-                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                        color: "grey"
-                    }
-
-                    Label{
-                        id:lblRightForget
-                        anchors.left: lblLeftForget.right
-                        text: "  Help!!"
-                        Layout.fillWidth: false
-                        color: "blue"
-                    }
-                }
-
-            }
         }
 
 

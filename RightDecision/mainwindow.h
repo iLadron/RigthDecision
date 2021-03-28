@@ -24,7 +24,7 @@ private:
     RegistrationWidget* regWidget;
 
     static bool createConnection(){
-        QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+        QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
         db.setDatabaseName("Diplom");
         db.setUserName("admin");
         db.setHostName("localhost");
