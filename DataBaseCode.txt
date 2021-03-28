@@ -1,0 +1,7 @@
+CREATE TABLE Users (
+	User_id int(10) UNSIGNED AUTO_INCREMENT,
+	Login VARCHAR(45),
+	Password VARCHAR(45),
+
+	PRIMARY KEY (User_id)
+);

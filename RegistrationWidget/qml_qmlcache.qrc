@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/forms">
+        <file alias="forms/RegistrationForm.qml">forms/RegistrationForm.qml</file>
+    </qresource>
+</RCC>
