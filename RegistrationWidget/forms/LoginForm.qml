@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
@@ -35,6 +35,11 @@ Rectangle{
                     implicitHeight:  reg.height/5 - 20
                     color: "white"
                 }
+
+                validator: RegExpValidator{
+                    regExp: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9_]{8,20}$/
+                }
+
                 placeholderText: "username"
             }
 
@@ -54,7 +59,7 @@ Rectangle{
                 color: "green"
                 Label{
                     anchors.centerIn: parent
-                    text: "Login!"
+                    text: "Login!(not working)"
                     color: "white"
                 }
 
@@ -95,10 +100,16 @@ Rectangle{
 
                         MouseArea{
                             anchors.fill: parent
+                            hoverEnabled: true
+                            onEntered: lblRightNew.color = "grey"
+                            onExited: lblRightNew.color = "blue"
                             onClicked: {
                                 console.log("Create new account");
                                 Form.openRegForm();
                             }
+
+
+
                         }
 
                     }
@@ -125,7 +136,7 @@ Rectangle{
                     Label{
                         id:lblRightForget
                         anchors.left: lblLeftForget.right
-                        text: "  Help!!"
+                        text: "  Help!!(not working)"
                         Layout.fillWidth: false
                         color: "blue"
                     }

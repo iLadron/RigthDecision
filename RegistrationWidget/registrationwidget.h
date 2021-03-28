@@ -20,6 +20,7 @@ class REGISTRATIONWIDGET_EXPORT RegistrationWidget : public QWidget
 
 public slots:
     bool tryLogin(const QString& login, const QString& password);
+    bool tryRegistration();
     void openRegForm();
 
 signals:
