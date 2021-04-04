@@ -15,12 +15,8 @@ SOURCES += \
 HEADERS += \
     mainwindow.h
 
-MYSQL_PREFIX=/usr/lib/x86_64-linux-gnu/qt5/plugins
-
 FORMS += \
     mainwindow.ui
-
-MYSQL_LIBS=-lmysqld
 
 TRANSLATIONS += \
     RightDecision_ru_RU.ts
