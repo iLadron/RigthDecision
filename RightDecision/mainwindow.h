@@ -25,12 +25,12 @@ private:
 
     static bool createConnection(){
         QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-        db.setDatabaseName("Diplom");
+        db.setDatabaseName("DIPLOM");
         db.setUserName("admin");
         db.setHostName("localhost");
         db.setPassword("adminspassword1A!");
 
-        if(db.open()){
+        if(!db.open()){
             qDebug()<<"Error. Can't open database";
             qDebug()<<db.lastError();
             return false;
