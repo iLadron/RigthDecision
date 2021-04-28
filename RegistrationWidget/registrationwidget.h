@@ -10,8 +10,9 @@
 #include <QVBoxLayout>
 
 #include <QtSql>
+#include <QObject>
 
-#include<QObject>
+#include "database.h"
 
 class REGISTRATIONWIDGET_EXPORT RegistrationWidget : public QWidget
 {
@@ -19,8 +20,11 @@ class REGISTRATIONWIDGET_EXPORT RegistrationWidget : public QWidget
     Q_OBJECT
 
 public slots:
-    bool tryLogin(const QString& login, const QString& password);
+    QString registerUser(const QString name,const QString surname,const QString login,
+                         const QString email,const QString password,const QString avatar);
     void openRegForm();
+    void openLogForm();
+
 
 signals:
     void isLoginSuccess(bool success);

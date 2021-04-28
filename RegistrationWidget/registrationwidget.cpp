@@ -1,13 +1,22 @@
 #include "registrationwidget.h"
 
 
-bool RegistrationWidget::tryLogin(const QString &login, const QString &password){
-    qDebug()<<"log and pass " << login<<" "<<password;
-    return true;
+QString RegistrationWidget::registerUser(const QString name,const QString surname,const QString login,
+                                         const QString email,const QString password,const QString avatar)
+{
+    User newUser = {name, surname, login, email, password, avatar};
+    Database::GetInstance()->registerUser(newUser);
+
+    return "true";
 }
 
 void RegistrationWidget::openRegForm(){
     m_mainLayout->replaceWidget(m_logWidget,m_regWidget);
+}
+
+void RegistrationWidget::openLogForm()
+{
+    m_mainLayout->replaceWidget(m_regWidget,m_logWidget);
 }
 
 RegistrationWidget::RegistrationWidget(/*QSqlDatabase *db,*/ QWidget *pwgt) : QWidget(pwgt)

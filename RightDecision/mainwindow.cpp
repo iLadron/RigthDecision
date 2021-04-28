@@ -7,8 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    createConnection();
-
     regWidget = new RegistrationWidget();
 
     QHBoxLayout *layout = new QHBoxLayout;

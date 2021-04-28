@@ -32,3 +32,10 @@ else:unix: LIBS += -L$$PWD/../RegistrationWidget/ -lRegistrationWidget
 
 INCLUDEPATH += $$PWD/../RegistrationWidget
 DEPENDPATH += $$PWD/../RegistrationWidget
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Database/release/ -lDatabase
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Database/debug/ -lDatabase
+else:unix: LIBS += -L$$PWD/../Database/ -lDatabase
+
+INCLUDEPATH += $$PWD/../Database
+DEPENDPATH += $$PWD/../Database
