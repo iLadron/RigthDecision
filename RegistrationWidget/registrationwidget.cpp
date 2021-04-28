@@ -8,6 +8,15 @@ QString RegistrationWidget::registerUser(const QString name,const QString surnam
     return Database::GetInstance()->registerUser(newUser);
 }
 
+QString RegistrationWidget::loginUser(const QString login, const QString password)
+{
+    User newUser;
+    newUser.login = login;
+    newUser.password = password;
+    QString temp =  Database::GetInstance()->loginUser(newUser);
+    return temp;
+}
+
 void RegistrationWidget::openRegForm(){
     m_mainLayout->replaceWidget(m_logWidget,m_regWidget);
 }

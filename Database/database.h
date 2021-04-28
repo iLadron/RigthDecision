@@ -21,6 +21,7 @@ class DATABASE_EXPORT Database
 public:
     //For users functions
     QString registerUser(User newUser);
+    QString loginUser(User user);
     bool isUserExist(User user);
     bool isEmailExist(User user);
 

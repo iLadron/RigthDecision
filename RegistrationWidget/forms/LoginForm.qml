@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
+import QtQuick.Dialogs 1.3
 
 
 Rectangle{
@@ -70,7 +71,9 @@ Rectangle{
                     anchors.fill: parent
                     onClicked: {
                         console.log(username.text + " " + password.text)
-                        Form.tryLogin(username.text, password.text)
+                        var res = Form.loginUser(username.text, password.text)
+                        messageError.text = res
+                        messageError.open()
 
                     }
                 }
@@ -108,11 +111,7 @@ Rectangle{
                                 console.log("Create new account");
                                 Form.openRegForm();
                             }
-
-
-
                         }
-
                     }
                 }
             }
@@ -150,5 +149,10 @@ Rectangle{
     }
 
 
+    MessageDialog{
+        id:messageError
+        title: "Error"
+        onAccepted: this.close();
+    }
 
 }

@@ -22,6 +22,7 @@ class REGISTRATIONWIDGET_EXPORT RegistrationWidget : public QWidget
 public slots:
     QString registerUser(const QString name,const QString surname,const QString login,
                          const QString email,const QString password,const QString avatar);
+    QString loginUser(const QString login, const QString password);
     void openRegForm();
     void openLogForm();
 

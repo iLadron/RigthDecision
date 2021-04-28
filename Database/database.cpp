@@ -27,6 +27,28 @@ QString Database::registerUser(User newUser)
     return "";
 }
 
+QString Database::loginUser(User user)
+{
+    if(!isUserExist(user)){
+        return /*tr*/("Логин не зарегестрирован");
+    }
+
+    QSqlQuery query;
+    QString str;
+    QString strLog = "SELECT id FROM Users WHERE login = '%1' AND password = '%2'";
+    str = strLog.arg(user.login).arg(user.password);
+    query.exec(str);
+    if(query.size() == 0){
+        return /*tr*/("Неверный пароль");
+    }
+
+    QSqlRecord rec = query.record();
+    query.next();
+
+    return QString::number(query.value(rec.indexOf("id")).toInt());
+
+}
+
 bool Database::isUserExist(User user)
 {
     QSqlQuery query;
@@ -34,7 +56,7 @@ bool Database::isUserExist(User user)
     QString strCommand = "SELECT * FROM Users WHERE login = '%1'";
     res = strCommand.arg(user.login);
     query.exec(res);
-    return query.size();
+    return query.size() != 0;
 }
 
 bool Database::isEmailExist(User user)
