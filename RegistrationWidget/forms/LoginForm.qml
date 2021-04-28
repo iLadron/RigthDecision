@@ -50,6 +50,7 @@ Rectangle{
                     implicitHeight:  reg.height/5 - 20
                     color: "white"
                 }
+                echoMode: TextInput.Password
                 placeholderText: "password"
             }
             Rectangle{

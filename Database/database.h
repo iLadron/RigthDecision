@@ -22,6 +22,7 @@ public:
     //For users functions
     QString registerUser(User newUser);
     bool isUserExist(User user);
+    bool isEmailExist(User user);
 
 
 

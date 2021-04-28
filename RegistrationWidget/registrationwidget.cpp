@@ -5,9 +5,7 @@ QString RegistrationWidget::registerUser(const QString name,const QString surnam
                                          const QString email,const QString password,const QString avatar)
 {
     User newUser = {name, surname, login, email, password, avatar};
-    Database::GetInstance()->registerUser(newUser);
-
-    return "true";
+    return Database::GetInstance()->registerUser(newUser);
 }
 
 void RegistrationWidget::openRegForm(){

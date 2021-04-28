@@ -19,7 +19,7 @@ Rectangle{
         }
 
         anchors.centerIn: parent
-        width: 300
+        width: 400
         height: 500
 
 
@@ -37,7 +37,7 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
-                placeholderText: "Name"
+                placeholderText: qsTr("Имя")
             }
 
             TextField{
@@ -47,7 +47,7 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
-                placeholderText: "Surname"
+                placeholderText: qsTr("Фамилия")
             }
 
             TextField{
@@ -57,7 +57,7 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
-                placeholderText: "Username"
+                placeholderText: qsTr("Логин")
             }
 
             TextField{
@@ -67,7 +67,7 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
-                placeholderText: "Email"
+                placeholderText: qsTr("Почта")
             }
 
 
@@ -78,7 +78,8 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
-                placeholderText: "password"
+                echoMode: TextInput.Password
+                placeholderText: qsTr("Пароль")
             }
 
             TextField{
@@ -88,7 +89,8 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
-                placeholderText: "second password"
+                echoMode: TextInput.Password
+                placeholderText: qsTr("Повторите пароль")
             }
 
             RowLayout{
@@ -104,7 +106,7 @@ Rectangle{
 
                     Label{
                         anchors.centerIn: parent
-                        text: "Back"
+                        text: qsTr("Назад")
                         color: "white"
                     }
 
@@ -126,7 +128,7 @@ Rectangle{
                     color: "green"
                     Label{
                         anchors.centerIn: parent
-                        text: "Registration!!"
+                        text: qsTr("Зарегестрироваться")
                         color: "white"
                     }
 
@@ -138,18 +140,21 @@ Rectangle{
                             console.log(username.text + " " + password.text)
                             if(name.text.length === 0 || surname.text === 0 || username.text.length === 0
                                     || email.text.length === 0 || password.text.length === 0 || secondPassword.text.length === 0){
-                                messageEmptyField.open();
+                                messageError.text = qsTr("Все поля должны быть заполнены")
+                                messageError.open();
                                 return
                             }
 
                             if(password.text !== secondPassword.text){
-                                messageWrongPassword.open()
+                                messageError.text = qsTr("Пароли не совпадают")
+                                messageError.open();
                                 return
                             }
-
-
-
-                            Form.registerUser(name.text, surname.text, username.text, email.text, password.text, "no avatar")
+                            var res = Form.registerUser(name.text, surname.text, username.text, email.text, password.text, "no avatar")
+                            if(res !== ""){
+                                messageError.text = res
+                                messageError.open();
+                            }
 
                         }
                     }
@@ -165,16 +170,8 @@ Rectangle{
     }
 
     MessageDialog{
-        id:messageEmptyField
+        id:messageError
         title: "Error"
-        text: "All fields have to be filled"
-        onAccepted: this.close();
-    }
-
-    MessageDialog{
-        id:messageWrongPassword
-        title: "Error"
-        text: "Пароли не совпадают"
         onAccepted: this.close();
     }
 

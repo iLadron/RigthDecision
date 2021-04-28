@@ -2,6 +2,13 @@
 
 QString Database::registerUser(User newUser)
 {
+    if(isUserExist(newUser)){
+        return /*tr*/("Логин уже зарегестрирован");
+    }
+
+    if(isEmailExist(newUser)){
+        return /*tr*/("Потча уже зарегестрирована");
+    }
     QSqlQuery query;
     QString str;
     QString strReg = "INSERT INTO Users(id, name, surname, login, email, password, avatar) "
@@ -17,21 +24,37 @@ QString Database::registerUser(User newUser)
         qDebug()<<"Error reg user";
     }
 
-    return "true";
+    return "";
 }
 
 bool Database::isUserExist(User user)
 {
-
+    QSqlQuery query;
+    QString res;
+    QString strCommand = "SELECT * FROM Users WHERE login = '%1'";
+    res = strCommand.arg(user.login);
+    query.exec(res);
+    return query.size();
 }
+
+bool Database::isEmailExist(User user)
+{
+    QSqlQuery query;
+    QString res;
+    QString strCommand = "SELECT * FROM Users WHERE email = '%1'";
+    res = strCommand.arg(user.email);
+    query.exec(res);
+    return query.size();
+}
+
 
 Database::Database()
 {
     m_db = QSqlDatabase::addDatabase("QMYSQL");
-    m_db.setDatabaseName("DIPLOM");
-    m_db.setUserName("admin");
-    m_db.setHostName("localhost");
-    m_db.setPassword("adminspassword1A!");
+    m_db.setDatabaseName("6Zfmd53HCv");
+    m_db.setUserName("6Zfmd53HCv");
+    m_db.setHostName("remotemysql.com");
+    m_db.setPassword("K2Xf5L3JT8");
 
     if(!m_db.open()){
         qDebug()<<"Error. Can't open database";
