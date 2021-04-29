@@ -32,8 +32,8 @@ DISTFILES += \
     forms/LoginForm.qml \
     forms/RegistrationForm.qml
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Database/release/ -lDatabase
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Database/debug/ -lDatabase
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Database/ -lDatabase
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Database/ -lDatabased
 else:unix: LIBS += -L$$PWD/../Database/ -lDatabase
 
 INCLUDEPATH += $$PWD/../Database
