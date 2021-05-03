@@ -12,7 +12,6 @@ Rectangle{
 
     Item{
 
-
         Rectangle{
             color: "transparent"
             anchors.fill: parent
@@ -20,9 +19,10 @@ Rectangle{
             border.color: "blue"
         }
 
-        anchors.centerIn: parent
-        width: 400
-        height: 500
+        anchors.fill:parent
+        //anchors.centerIn: parent
+        //width: 400
+        //height: 500
 
 
         ColumnLayout{
@@ -40,6 +40,9 @@ Rectangle{
                     color: "white"
                 }
                 placeholderText: qsTr("Имя")
+                validator: RegExpValidator{
+                    regExp: /^[а-яА-Я]{2,20}$/
+                }
             }
 
             TextField{
@@ -50,6 +53,9 @@ Rectangle{
                     color: "white"
                 }
                 placeholderText: qsTr("Фамилия")
+                validator: RegExpValidator{
+                    regExp: /^[а-яА-Я]{2,20}$/
+                }
             }
 
             TextField{
@@ -60,6 +66,11 @@ Rectangle{
                     color: "white"
                 }
                 placeholderText: qsTr("Логин")
+
+
+                validator: RegExpValidator{
+                    regExp: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9_]{8,20}$/
+                }
             }
 
             TextField{

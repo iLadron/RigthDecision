@@ -43,7 +43,7 @@ Rectangle{
                     regExp: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9_]{8,20}$/
                 }
 
-                placeholderText: "username"
+                placeholderText: qsTr("Логин")
             }
 
             TextField{
@@ -54,7 +54,11 @@ Rectangle{
                     color: "white"
                 }
                 echoMode: TextInput.Password
-                placeholderText: "password"
+                validator: RegExpValidator{
+                    regExp: /^[^\s]{8,20}$/
+                }
+
+                placeholderText: qsTr("Пароль")
             }
             Rectangle{
                 id:button
@@ -73,6 +77,16 @@ Rectangle{
                     anchors.fill: parent
                     onClicked: {
                         console.log(username.text + " " + password.text)
+                        console.log(username.text.length === 0);
+                        console.log(password.text.length === 0);
+
+                        if(username.text.length === 0 || password.text.length === 0){
+
+                            messageError.text = qsTr("Нужно заполнить все поля");
+                            messageError.visible = true;
+                            return;
+                        }
+
                         var res = Form.loginUser(username.text, password.text)
                         messageError.text = res
                         messageError.open()
