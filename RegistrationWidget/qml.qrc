@@ -2,5 +2,6 @@
     <qresource prefix="/forms">
         <file>forms/RegistrationForm.qml</file>
         <file>forms/LoginForm.qml</file>
+        <file>forms/MainLogReg.qml</file>
     </qresource>
 </RCC>

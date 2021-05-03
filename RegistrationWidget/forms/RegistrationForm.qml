@@ -8,6 +8,8 @@ import QtQuick.Dialogs 1.3
 Rectangle{
     color: "lightgray"
 
+    signal openLogin()
+
     Item{
 
 
@@ -116,7 +118,7 @@ Rectangle{
                         anchors.fill: parent
                         onClicked: {
                             console.log("back");
-                            Form.openLogForm();
+                            openLogin()
                         }
                     }
 

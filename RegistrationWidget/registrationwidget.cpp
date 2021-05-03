@@ -17,19 +17,10 @@ QString RegistrationWidget::loginUser(const QString login, const QString passwor
     return temp;
 }
 
-void RegistrationWidget::openRegForm(){
-    m_mainLayout->replaceWidget(m_logWidget,m_regWidget);
-}
-
-void RegistrationWidget::openLogForm()
-{
-    m_mainLayout->replaceWidget(m_regWidget,m_logWidget);
-}
-
 RegistrationWidget::RegistrationWidget(/*QSqlDatabase *db,*/ QWidget *pwgt) : QWidget(pwgt)
 {
     //Creating LoginForm
-    m_logWidget = new QQuickWidget(QUrl("qrc:/forms/forms/LoginForm.qml"));
+    m_logWidget = new QQuickWidget(QUrl("qrc:/forms/forms/MainLogReg.qml"));
     m_logWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
 
     m_mainLayout = new QVBoxLayout;
@@ -39,14 +30,5 @@ RegistrationWidget::RegistrationWidget(/*QSqlDatabase *db,*/ QWidget *pwgt) : QW
     m_logContext = m_logWidget->rootContext();
     m_logContext->setContextProperty("Form",this);
 
-    setLayout(m_mainLayout);
-
-
-    //Creating RegistrationForm
-    m_regWidget = new QQuickWidget(QUrl("qrc:/forms/forms/RegistrationForm.qml"));
-    m_regWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-
-    m_regContext = m_regWidget->rootContext();
-    m_regContext->setContextProperty("Form",this);
-
+    setLayout(m_mainLayout);    
 }

@@ -5,11 +5,13 @@ import QtQuick.Dialogs 1.3
 
 
 Rectangle{
+
+    signal openRegistration()
+
     color: "lightgray"
 
+
     Item{
-
-
         Rectangle{
             color: "transparent"
             anchors.fill: parent
@@ -109,7 +111,7 @@ Rectangle{
                             onExited: lblRightNew.color = "blue"
                             onClicked: {
                                 console.log("Create new account");
-                                Form.openRegForm();
+                                openRegistration();
                             }
                         }
                     }

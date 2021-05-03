@@ -30,6 +30,7 @@ RESOURCES += \
 
 DISTFILES += \
     forms/LoginForm.qml \
+    forms/MainLogReg.qml \
     forms/RegistrationForm.qml
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Database/ -lDatabase

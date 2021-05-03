@@ -16,29 +16,27 @@
 
 class REGISTRATIONWIDGET_EXPORT RegistrationWidget : public QWidget
 {
-
     Q_OBJECT
+
+public:
+    RegistrationWidget(/*QSqlDatabase *db,*/QWidget *pwgt = 0);
 
 public slots:
     QString registerUser(const QString name,const QString surname,const QString login,
                          const QString email,const QString password,const QString avatar);
     QString loginUser(const QString login, const QString password);
-    void openRegForm();
-    void openLogForm();
 
 
 signals:
     void isLoginSuccess(bool success);
 
-public:
-    RegistrationWidget(/*QSqlDatabase *db,*/QWidget *pwgt = 0);
 
 private:
     //QSqlDatabase* m_db;
 
-    QQuickWidget *m_logWidget, *m_regWidget;
+    QQuickWidget *m_logWidget;
     QVBoxLayout *m_mainLayout;
-    QQmlContext *m_logContext, *m_regContext;
+    QQmlContext *m_logContext;
 
 
 };
