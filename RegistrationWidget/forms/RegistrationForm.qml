@@ -39,6 +39,8 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
+                selectByMouse: true
+
                 placeholderText: qsTr("Имя")
                 validator: RegExpValidator{
                     regExp: /^[а-яА-Я]{2,20}$/
@@ -52,6 +54,8 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
+                selectByMouse: true
+
                 placeholderText: qsTr("Фамилия")
                 validator: RegExpValidator{
                     regExp: /^[а-яА-Я]{2,20}$/
@@ -65,6 +69,8 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
+                selectByMouse: true
+
                 placeholderText: qsTr("Логин")
 
 
@@ -80,6 +86,8 @@ Rectangle{
                     implicitHeight:  reg.height/7 - 20
                     color: "white"
                 }
+                selectByMouse: true
+
                 placeholderText: qsTr("Почта")
             }
 
@@ -92,6 +100,11 @@ Rectangle{
                     color: "white"
                 }
                 echoMode: TextInput.Password
+                validator: RegExpValidator{
+                    regExp: /^[^\s]{8,20}$/
+                }
+                selectByMouse: true
+
                 placeholderText: qsTr("Пароль")
             }
 
@@ -103,6 +116,10 @@ Rectangle{
                     color: "white"
                 }
                 echoMode: TextInput.Password
+                validator: RegExpValidator{
+                    regExp: /^[^\s]{8,20}$/
+                }
+                selectByMouse: true
                 placeholderText: qsTr("Повторите пароль")
             }
 

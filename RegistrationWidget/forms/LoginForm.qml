@@ -6,12 +6,17 @@ import QtQuick.Dialogs 1.3
 
 Rectangle{
 
+    id:control
     signal openRegistration()
 
     color: "lightgray"
 
 
     Item{
+
+        focus: true
+
+
         Rectangle{
             color: "transparent"
             anchors.fill: parent
@@ -42,6 +47,10 @@ Rectangle{
                 validator: RegExpValidator{
                     regExp: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9_]{8,20}$/
                 }
+                selectByMouse: true
+                Keys.onReturnPressed: {
+                    control.login();
+                }
 
                 placeholderText: qsTr("Логин")
             }
@@ -58,6 +67,11 @@ Rectangle{
                     regExp: /^[^\s]{8,20}$/
                 }
 
+                Keys.onReturnPressed: {
+                    control.login();
+                }
+                selectByMouse: true
+
                 placeholderText: qsTr("Пароль")
             }
             Rectangle{
@@ -71,26 +85,13 @@ Rectangle{
                     color: "white"
                 }
 
+
                 MouseArea{
                     id:buttonArea
                     signal tryLog(string login, string password)
                     anchors.fill: parent
                     onClicked: {
-                        console.log(username.text + " " + password.text)
-                        console.log(username.text.length === 0);
-                        console.log(password.text.length === 0);
-
-                        if(username.text.length === 0 || password.text.length === 0){
-
-                            messageError.text = qsTr("Нужно заполнить все поля");
-                            messageError.visible = true;
-                            return;
-                        }
-
-                        var res = Form.loginUser(username.text, password.text)
-                        messageError.text = res
-                        messageError.open()
-
+                        control.login();
                     }
                 }
             }
@@ -169,6 +170,18 @@ Rectangle{
         id:messageError
         title: "Error"
         onAccepted: this.close();
+    }
+    function login(){
+        if(username.text.length === 0 || password.text.length === 0){
+
+            messageError.text = qsTr("Нужно заполнить все поля");
+            messageError.visible = true;
+            return;
+        }
+
+        var res = Form.loginUser(username.text, password.text)
+        messageError.text = res
+        messageError.open()
     }
 
 }
