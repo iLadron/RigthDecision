@@ -8,12 +8,9 @@ Rectangle{
 
     id:control
     signal openRegistration()
-
     color: "lightgray"
 
-
     Item{
-
         focus: true
 
 
@@ -28,7 +25,6 @@ Rectangle{
         width: 300
         height: 300
 
-
         ColumnLayout{
             id: reg
 
@@ -40,7 +36,7 @@ Rectangle{
                 id:username
                 background: Rectangle{
                     implicitWidth: reg.width
-                    implicitHeight:  reg.height/5 - 20
+                    implicitHeight:  reg.height/reg.children.length - 20
                     color: "white"
                 }
 
@@ -59,7 +55,7 @@ Rectangle{
                 id:password
                 background: Rectangle{
                     implicitWidth: reg.width
-                    implicitHeight:  reg.height/5 - 20
+                    implicitHeight:  reg.height/reg.children.length - 20
                     color: "white"
                 }
                 echoMode: TextInput.Password
@@ -69,19 +65,19 @@ Rectangle{
 
                 Keys.onReturnPressed: {
                     control.login();
+                    console.log(reg.children.length)
                 }
                 selectByMouse: true
-
                 placeholderText: qsTr("Пароль")
             }
             Rectangle{
                 id:button
                 width: parent.width
-                height: parent.height/5 - 20
+                height: parent.height/reg.children.length - 20
                 color: "green"
                 Label{
                     anchors.centerIn: parent
-                    text: "Login!(not working)"
+                    text: qsTr("Войти")
                     color: "white"
                 }
 
@@ -98,7 +94,7 @@ Rectangle{
             Rectangle{
                 id:newAccount
                 width: parent.width
-                height: parent.height/5 - 20
+                height: parent.height/reg.children.length - 20
                 color: "white"
                 Item{
                     anchors.centerIn:parent
@@ -106,7 +102,7 @@ Rectangle{
                     height: lblLeftNew.height
                     Label{
                         id:lblLeftNew
-                        text: "New here?"
+                        text: "Первый раз?"
                         Layout.fillWidth: false
                         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                         color: "grey"
@@ -115,7 +111,7 @@ Rectangle{
                     Label{
                         id:lblRightNew
                         anchors.left: lblLeftNew.right
-                        text: "  Create account!!"
+                        text: qsTr("  Создать аккаунт")
                         Layout.fillWidth: false
                         color: "blue"
 
@@ -136,7 +132,7 @@ Rectangle{
             Rectangle{
                 id:forget
                 width: parent.width
-                height: parent.height/5 - 20
+                height: parent.height/reg.children.length - 20
                 color: "white"
                 Item{
                     anchors.centerIn:parent
@@ -144,7 +140,7 @@ Rectangle{
                     height: lblLeftForget.height
                     Label{
                         id:lblLeftForget
-                        text: "Forget password?"
+                        text: qsTr("Забыли пароль?")
                         Layout.fillWidth: false
                         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                         color: "grey"
@@ -153,16 +149,13 @@ Rectangle{
                     Label{
                         id:lblRightForget
                         anchors.left: lblLeftForget.right
-                        text: "  Help!!(not working)"
+                        text: qsTr(" Восстановление")
                         Layout.fillWidth: false
                         color: "blue"
                     }
                 }
-
             }
         }
-
-
     }
 
 
@@ -173,7 +166,12 @@ Rectangle{
     }
     function login(){
         if(username.text.length === 0 || password.text.length === 0){
+            messageError.text = qsTr("Нужно заполнить все поля");
+            messageError.visible = true;
+            return;
+        }
 
+        if(username.text.length === 0 ){
             messageError.text = qsTr("Нужно заполнить все поля");
             messageError.visible = true;
             return;

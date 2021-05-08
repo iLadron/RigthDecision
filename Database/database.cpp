@@ -51,10 +51,12 @@ QString Database::loginUser(User user)
 
 bool Database::isUserExist(User user)
 {
+
     QSqlQuery query;
     QString res;
     QString strCommand = "SELECT * FROM Users WHERE login = '%1'";
     res = strCommand.arg(user.login);
+    query.clear();
     query.exec(res);
     return query.size() != 0;
 }
