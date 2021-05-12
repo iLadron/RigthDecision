@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include "registrationwidget.h"
+#include "coursewidget.h"
+#include "mainpagewidget.h"
 
 #include <QMainWindow>
 
@@ -19,10 +21,30 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private:
-    Ui::MainWindow *ui;
-    RegistrationWidget* regWidget;
 
+public slots:
+
+    //opens
+    void openLogin();
+    void openCourse();
+    void openMainPage(int id);
+
+
+private:
+
+    //windows
+    Ui::MainWindow *ui;
+    RegistrationWidget *regWidget;
+    CourseWidget *courseWidget;
+    MainPageWidget *mainPageWidget;
+
+
+    //Layouts
+    QHBoxLayout *layout;
+    QWidget *w;
+
+    //
+    User *m_user;
 
 };
 #endif // MAINWINDOW_H

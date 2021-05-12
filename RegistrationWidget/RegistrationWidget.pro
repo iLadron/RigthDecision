@@ -39,3 +39,4 @@ else:unix: LIBS += -L$$PWD/../Database/ -lDatabase
 
 INCLUDEPATH += $$PWD/../Database
 DEPENDPATH += $$PWD/../Database
+

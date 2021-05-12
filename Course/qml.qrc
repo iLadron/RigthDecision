@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/forms">
+        <file>formss/CourseMaker.qml</file>
+        <file>formss/MainCourseForm.qml</file>
+        <file>formss/TestMaker.qml</file>
+    </qresource>
+</RCC>

@@ -8,6 +8,7 @@ Rectangle{
 
     id:control
     signal openRegistration()
+    signal succesLogin();
     color: "lightgray"
 
     Item{
@@ -65,7 +66,6 @@ Rectangle{
 
                 Keys.onReturnPressed: {
                     control.login();
-                    console.log(reg.children.length)
                 }
                 selectByMouse: true
                 placeholderText: qsTr("Пароль")
@@ -178,8 +178,10 @@ Rectangle{
         }
 
         var res = Form.loginUser(username.text, password.text)
-        messageError.text = res
-        messageError.open()
+        if(res !== "success"){
+            messageError.text = res
+            messageError.open()
+        }
     }
 
 }

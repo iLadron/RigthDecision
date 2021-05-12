@@ -19,7 +19,7 @@ class REGISTRATIONWIDGET_EXPORT RegistrationWidget : public QWidget
     Q_OBJECT
 
 public:
-    RegistrationWidget(/*QSqlDatabase *db,*/QWidget *pwgt = 0);
+    RegistrationWidget(QWidget *pwgt = 0);
 
 public slots:
     QString registerUser(const QString name,const QString surname,const QString login,
@@ -28,17 +28,14 @@ public slots:
 
 
 signals:
-    void isLoginSuccess(bool success);
+    void loginSuccess(int id);
 
 
 private:
-    //QSqlDatabase* m_db;
 
     QQuickWidget *m_logWidget;
     QVBoxLayout *m_mainLayout;
     QQmlContext *m_logContext;
-
-
 };
 
 #endif // REGISTRATIONWIDGET_H

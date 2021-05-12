@@ -1,0 +1,12 @@
+#ifndef COURSEWIDGET_GLOBAL_H
+#define COURSEWIDGET_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(COURSEWIDGET_LIBRARY)
+#  define COURSEWIDGET_EXPORT Q_DECL_EXPORT
+#else
+#  define COURSEWIDGET_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // COURSEWIDGET_GLOBAL_H

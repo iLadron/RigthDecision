@@ -39,3 +39,17 @@ else:unix: LIBS += -L$$PWD/../Database/ -lDatabase
 
 INCLUDEPATH += $$PWD/../Database
 DEPENDPATH += $$PWD/../Database
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../CourseWidget/release/ -lCourseWidget
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../CourseWidget/debug/ -lCourseWidget
+else:unix: LIBS += -L$$PWD/../CourseWidget/ -lCourseWidget
+
+INCLUDEPATH += $$PWD/../CourseWidget
+DEPENDPATH += $$PWD/../CourseWidget
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../MainPageWidget/release/ -lMainPageWidget
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../MainPageWidget/debug/ -lMainPageWidget
+else:unix: LIBS += -L$$PWD/../MainPageWidget/ -lMainPageWidget
+
+INCLUDEPATH += $$PWD/../MainPageWidget
+DEPENDPATH += $$PWD/../MainPageWidget

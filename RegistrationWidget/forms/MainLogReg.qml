@@ -19,10 +19,5 @@ Item {
             console.log("op")
             control.isRegistration = isRegistration === 0 ? 1 : 0;
         }
-
     }
-
-
-
-
 }

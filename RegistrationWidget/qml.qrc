@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/forms">
-        <file>forms/RegistrationForm.qml</file>
         <file>forms/LoginForm.qml</file>
         <file>forms/MainLogReg.qml</file>
+        <file>forms/RegistrationForm.qml</file>
     </qresource>
 </RCC>
