@@ -35,7 +35,7 @@ QString RegistrationWidget::loginUser(const QString login, const QString passwor
     bool ok;
     temp.toInt(&ok);
     if(ok){
-        emit loginSuccess(temp.toInt());
+        emit loginSuccess();
         return "success";
     }
     return temp;

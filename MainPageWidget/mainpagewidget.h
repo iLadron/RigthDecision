@@ -19,6 +19,9 @@ class MAINPAGEWIDGET_EXPORT MainPageWidget : public QWidget
 public:
     MainPageWidget(QWidget *pwgt = 0);
 
+signals:
+    void openLK();
+
 private:
     QQuickWidget *m_mainWidget;
     QVBoxLayout *m_mainLayout;

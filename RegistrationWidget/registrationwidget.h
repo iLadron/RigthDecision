@@ -28,8 +28,7 @@ public slots:
 
 
 signals:
-    void loginSuccess(int id);
-
+    void loginSuccess();
 
 private:
 

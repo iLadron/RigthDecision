@@ -2,5 +2,6 @@
 <RCC>
     <qresource prefix="/">
         <file alias="forms/MainWindow.qml">forms/MainWindow.qml</file>
+        <file alias="forms/logo.png">forms/logo.png</file>
     </qresource>
 </RCC>

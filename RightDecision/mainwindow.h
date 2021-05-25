@@ -4,6 +4,7 @@
 #include "registrationwidget.h"
 #include "coursewidget.h"
 #include "mainpagewidget.h"
+#include "userpagewidget.h"
 
 #include <QMainWindow>
 
@@ -27,7 +28,8 @@ public slots:
     //opens
     void openLogin();
     void openCourse();
-    void openMainPage(int id);
+    void openMainPage();
+    void openLKPage();
 
 
 private:
@@ -37,6 +39,7 @@ private:
     RegistrationWidget *regWidget;
     CourseWidget *courseWidget;
     MainPageWidget *mainPageWidget;
+    UserPageWidget *userPageWidget;
 
 
     //Layouts
@@ -45,6 +48,10 @@ private:
 
     //
     User *m_user;
+
+private:
+    void clearLayout(QLayout *layout);
+
 
 };
 #endif // MAINWINDOW_H

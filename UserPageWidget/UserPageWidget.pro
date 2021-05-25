@@ -1,4 +1,4 @@
-QT -= gui
+QT += gui qml widgets quickwidgets quick sql
 
 TEMPLATE = lib
 DEFINES += USERPAGEWIDGET_LIBRARY
@@ -24,3 +24,9 @@ unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    qmlUserPage.qrc
+
+DISTFILES += \
+    forms/UserPageFrom.qml

@@ -53,3 +53,13 @@ else:unix: LIBS += -L$$PWD/../MainPageWidget/ -lMainPageWidget
 
 INCLUDEPATH += $$PWD/../MainPageWidget
 DEPENDPATH += $$PWD/../MainPageWidget
+
+RESOURCES += \
+    files.qrc
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../UserPageWidget/release/ -lUserPageWidget
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../UserPageWidget/debug/ -lUserPageWidget
+else:unix: LIBS += -L$$PWD/../UserPageWidget/ -lUserPageWidget
+
+INCLUDEPATH += $$PWD/../UserPageWidget
+DEPENDPATH += $$PWD/../UserPageWidget

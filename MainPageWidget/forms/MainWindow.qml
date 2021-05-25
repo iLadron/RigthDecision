@@ -10,11 +10,32 @@ Rectangle{
     color: "lightgray"
 
     Label{
-        width: 200
-        height: 200
+        width: 100
+        height: 100
+        text: "Главная страница"
         anchors.centerIn: parent
-        text: "Main page!"
     }
 
 
+    Rectangle{
+        id:btnLK
+        width: 200
+        height: 100
+        color: "green"
+        Label{
+            anchors.centerIn: parent
+            text: qsTr("Личный каибнет")
+            color: "white"
+        }
+
+
+        MouseArea{
+            id:maLK
+            anchors.fill:parent
+            onClicked: {
+                console.log("open LK");
+                Form.openLK();
+            }
+        }
+    }
 }

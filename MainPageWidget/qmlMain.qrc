@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>forms/MainWindow.qml</file>
+        <file>forms/logo.png</file>
     </qresource>
 </RCC>
