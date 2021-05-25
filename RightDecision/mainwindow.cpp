@@ -44,7 +44,6 @@ void MainWindow::openLogin()
 void MainWindow::openCourse()
 {
     clearLayout(layout);
-    //layout->addWidget(courseWidget);
     courseWidget->setVisible(true);
     w->setLayout(layout);
     setCentralWidget(w);
@@ -52,7 +51,7 @@ void MainWindow::openCourse()
 
 void MainWindow::openMainPage()
 {
-    qDebug()<<"OpenMain";
+    qDebug()<<"OpenMa2in";
     clearLayout(layout);
     mainPageWidget->setVisible(true);
     w->setLayout(layout);
