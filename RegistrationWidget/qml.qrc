@@ -3,5 +3,6 @@
         <file>forms/LoginForm.qml</file>
         <file>forms/MainLogReg.qml</file>
         <file>forms/RegistrationForm.qml</file>
+        <file>forms/ResetPassword.qml</file>
     </qresource>
 </RCC>

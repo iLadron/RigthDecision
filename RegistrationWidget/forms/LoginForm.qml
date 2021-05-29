@@ -8,6 +8,7 @@ Rectangle{
 
     id:control
     signal openRegistration()
+    signal openReset();
     signal succesLogin();
     color: "lightgray"
 
@@ -152,6 +153,16 @@ Rectangle{
                         text: qsTr(" Восстановление")
                         Layout.fillWidth: false
                         color: "blue"
+                    }
+
+                    MouseArea{
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onEntered: lblRightForget.color = "grey"
+                        onExited: lblRightForget.color = "blue"
+                        onClicked: {
+                            openReset();
+                        }
                     }
                 }
             }

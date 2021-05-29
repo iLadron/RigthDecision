@@ -12,6 +12,8 @@
 #include <QDir>
 #include <QObject>
 
+#include "test.h"
+
 
 
 class COURSEWIDGET_EXPORT CourseWidget : public QWidget
@@ -20,13 +22,20 @@ class COURSEWIDGET_EXPORT CourseWidget : public QWidget
 
 public:
     CourseWidget(QWidget *pwdt = 0);
-    int lol = 10;
+
+signals:
+
+    void openLK();
 
 private:
 
     QQuickWidget *m_courseWidget;
     QVBoxLayout *m_mainLayout;
     QQmlContext *m_courseContext;
+
+    std::vector<Test> m_tests;
+
+
 };
 
 #endif // COURSEWIDGET_H

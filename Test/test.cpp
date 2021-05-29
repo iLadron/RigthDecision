@@ -4,12 +4,26 @@ Test::Test()
 {
 }
 
-void Question::setQuestion(QString question)
+void Test::AddTest(const QString& question, const QStringList& answers, int rightAnswer)
 {
-    m_question = question;
+    Question task;
+    task.m_question = question;
+    task.m_answers = answers;
+    task.m_rightAnswer = rightAnswer;
+
+    m_questions.push_back(task);
 }
 
-QString Question::getQuestion()
+QHash<int, QByteArray> Test::roleNames() const
 {
-    return m_question;
+    QHash<int, QByteArray> roles;
+
+    roles[QuestionRole] = "QuestionRole";
+    roles[AnswersRole] = "AnswersRole";
+    return roles;
+}
+
+int Test::rowCount(const QModelIndex &parent) const
+{
+    return m_questions.size();
 }

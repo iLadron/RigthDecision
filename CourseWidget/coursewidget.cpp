@@ -3,7 +3,7 @@
 CourseWidget::CourseWidget(QWidget *pwgt) : QWidget(pwgt)
 {
     //Creating CourseForm
-    m_courseWidget = new QQuickWidget(QUrl("qrc:/forms/forms/CourseMaker.qml"));
+    m_courseWidget = new QQuickWidget(QUrl("qrc:/forms/forms/MainCourseForm.qml"));
     m_courseWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
 
     m_mainLayout = new QVBoxLayout;

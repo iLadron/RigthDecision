@@ -30,3 +30,10 @@ DISTFILES +=
 RESOURCES += \
     qmlCourse.qrc
 
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Test/release/ -lTest
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Test/debug/ -lTest
+else:unix: LIBS += -L$$PWD/../Test/ -lTest
+
+INCLUDEPATH += $$PWD/../Test
+DEPENDPATH += $$PWD/../Test

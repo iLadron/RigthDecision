@@ -21,6 +21,7 @@ public:
 
 signals:
     void openMainWindow();
+    void openCreateCourseWidget();
 
 private:
 
