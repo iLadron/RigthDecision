@@ -20,8 +20,13 @@ class COURSEWIDGET_EXPORT CourseWidget : public QWidget
 {
     Q_OBJECT
 
+
 public:
     CourseWidget(QWidget *pwdt = 0);
+
+public slots:
+    void addQuestin(const QString& question, const QStringList& answers, int rightAnswer);
+
 
 signals:
 
@@ -34,7 +39,7 @@ private:
     QQmlContext *m_courseContext;
 
     std::vector<Test> m_tests;
-
+    Test *test;
 
 };
 

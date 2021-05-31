@@ -35,12 +35,14 @@ Rectangle{
 
     Rectangle{
         id:btnСreateQuestion
+        anchors.left: btnСreateCourse.right
+        anchors.leftMargin: 10
         width: 200
         height: 100
         color: "green"
         Label{
             anchors.centerIn: parent
-            text: qsTr("Создать вопрос")
+            text: qsTr("Добавить вопрос")
             color: "white"
         }
 
@@ -53,6 +55,71 @@ Rectangle{
         }
     }
 
+
+    ListView{
+        id:list
+        x:200
+        y:200
+        width: 400
+        height: 200
+
+        Rectangle{
+            id:listBorder
+            anchors.fill:parent
+            border.width: 1
+            border.color: "red"
+            color: "transparent"
+        }
+
+        model: testModel
+
+
+        delegate: RowLayout{
+
+
+            GridLayout{
+                id:gridTest1
+
+                rows: 5
+                columns: 2
+
+                Label{
+                    id:answer
+                    text:model.Question
+                    Layout.columnSpan: 2
+                }
+
+                RadioButton {
+                    id:rb11
+                }
+
+                Label{
+                    text:model.Answers[0]
+                }
+
+
+                RadioButton {
+                }
+                Label{
+                    text:model.Answers[1]
+                }
+
+                RadioButton {
+                }
+                Label{
+                    text:model.Answers[2]
+                }
+
+                RadioButton {
+                }
+                Label{
+                    text:model.Answers[3]
+                }
+            }
+
+
+        }
+    }
 
     Label{
         width: 100
@@ -68,7 +135,7 @@ Rectangle{
 
         Rectangle{
             anchors.fill: parent
-            color: "transparent"
+            color: control.color
             border.width: 2
             border.color: "red"
 
@@ -151,8 +218,6 @@ Rectangle{
                     placeholderText: qsTr("Ответ 3")
                 }
 
-
-
                 RadioButton {
                 }
                 TextField{
@@ -165,6 +230,54 @@ Rectangle{
 
                     selectByMouse: true
                     placeholderText: qsTr("Ответ 4")
+                }
+            }
+
+            RowLayout{
+                Rectangle{
+                    id:btnСancel
+                    width: 200
+                    height: 30
+                    color: "green"
+                    Label{
+                        anchors.centerIn: parent
+                        text: qsTr("Отмена")
+                        color: "white"
+                    }
+
+
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                            addQuestion.visible = false
+                        }
+                    }
+                }
+
+                Rectangle{
+                    id:btnAddQuestion;
+                    width: 200
+                    height: 30
+                    color: "green"
+                    Label{
+                        anchors.centerIn: parent
+                        text: qsTr("Добавить вопрос")
+                        color: "white"
+                    }
+
+
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+
+
+                            //TODO: Add Question Logic
+
+
+                            Form.addQuestin(question.text, [ans1.text, ans2.text, ans3.text,ans4.text],2)
+                            addQuestion.visible = false
+                        }
+                    }
                 }
             }
         }
