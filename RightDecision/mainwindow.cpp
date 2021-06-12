@@ -12,12 +12,19 @@ MainWindow::MainWindow(QWidget *parent)
     mainPageWidget = new MainPageWidget();
     userPageWidget = new UserPageWidget();
 
+
+
+
+    //Переходы между страниц
     connect(regWidget,SIGNAL(loginSuccess()), this, SLOT(openMainPage()));
     connect(mainPageWidget, SIGNAL(openLK()), this, SLOT(openLKPage()));
     connect(userPageWidget, SIGNAL(openMainWindow()), this, SLOT(openMainPage()));
     connect(userPageWidget, SIGNAL(openCreateCourseWidget()), this, SLOT(openCourse()));
     connect(courseWidget, SIGNAL(openLK()), this, SLOT(openLKPage()));
 
+
+    //События
+    connect(regWidget,SIGNAL(loginSuccess()), this, SLOT(afterLoginSuccsess()));
 
     layout = new QHBoxLayout();
     layout->addWidget(regWidget);
@@ -29,7 +36,32 @@ MainWindow::MainWindow(QWidget *parent)
     w = new QWidget();
     w->setLayout(layout);
     setCentralWidget(w);
+
+
+
+
+
+    /*
+
+    manager = new QNetworkAccessManager();
+
+
+    QObject::connect(manager, &QNetworkAccessManager::finished,
+         this, [=](QNetworkReply *reply) {
+             if (reply->error()) {
+                 qDebug() << reply->errorString();
+                 return;
+             }
+
+             QString answer = reply->readAll();
+
+             qDebug() << answer;
+         }
+     );
+*/
 }
+
+
 
 MainWindow::~MainWindow()
 {
@@ -79,4 +111,15 @@ void MainWindow::clearLayout(QLayout *layout) {
     }
     qDebug()<<layout->count();
 
+}
+
+void MainWindow::afterLoginSuccsess()
+{
+    userPageWidget->setUser({});
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    request.setUrl(QUrl("https://drive.google.com/uc?export=download&id=1LZV5vdcKEbj6ogYHrn_in6NYAjp53NTU"));
+     manager->get(QNetworkRequest(QUrl("http://qt-project.org")));
 }

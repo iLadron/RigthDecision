@@ -14,12 +14,14 @@ std::vector<Question> Test::questions() const
 
 void Test::AddTest(const QString& question, const QStringList& answers, int rightAnswer)
 {
+    beginResetModel();
     Question task;
     task.m_question = question;
     task.m_answers = answers;
     task.m_rightAnswer = rightAnswer;
 
     m_questions.push_back(task);
+    endResetModel();
 
     qDebug()<<"TestSize " << m_questions.size();
 }

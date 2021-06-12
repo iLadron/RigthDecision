@@ -20,7 +20,6 @@ CourseWidget::CourseWidget(QWidget *pwgt) : QWidget(pwgt)
     //m_courseContext->setContextProperty("Path", QDir::currentPath()+ "/../CourseWidget/forms/");
     m_courseContext->setContextProperty("testModel",test);
     m_courseContext->setContextProperty("Form",this);
-
     setLayout(m_mainLayout);
 
 

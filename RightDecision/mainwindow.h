@@ -7,6 +7,8 @@
 #include "userpagewidget.h"
 
 #include <QMainWindow>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 #include <QSql>
 
@@ -32,6 +34,17 @@ public slots:
     void openLKPage();
 
 
+
+    //После удачного логина
+    void afterLoginSuccsess();
+
+
+
+private slots:
+    void on_pushButton_clicked();
+
+
+
 private:
 
     //windows
@@ -48,6 +61,9 @@ private:
 
     //
     User *m_user;
+
+    QNetworkAccessManager *manager;
+     QNetworkRequest request;
 
 private:
     void clearLayout(QLayout *layout);

@@ -35,7 +35,7 @@ QString Database::loginUser(User user)
 
     QSqlQuery query;
     QString str;
-    QString strLog = "SELECT id FROM Users WHERE login = '%1' AND password = '%2'";
+    QString strLog = "SELECT * FROM Users WHERE login = '%1' AND password = '%2'";
     str = strLog.arg(user.login).arg(user.password);
     query.exec(str);
     if(query.size() == 0){
@@ -44,6 +44,16 @@ QString Database::loginUser(User user)
 
     QSqlRecord rec = query.record();
     query.next();
+
+    m_loginedUser = new User();
+
+    m_loginedUser->id = query.value(rec.indexOf("id")).toInt();
+    m_loginedUser->avatar = query.value(rec.indexOf("avatar")).toString();
+    m_loginedUser->email = query.value(rec.indexOf("email")).toString();
+    m_loginedUser->login = query.value(rec.indexOf("login")).toString();
+    m_loginedUser->name = query.value(rec.indexOf("name")).toString();
+    m_loginedUser->password = query.value(rec.indexOf("password")).toString();
+    m_loginedUser->surname = query.value(rec.indexOf("surname")).toString();
 
     return QString::number(query.value(rec.indexOf("id")).toInt());
 
@@ -93,6 +103,7 @@ Database::Database()
 }
 
 Database* Database::database_ = nullptr;
+User* Database::m_loginedUser = nullptr;
 
 Database *Database::GetInstance()
 {
@@ -100,4 +111,9 @@ Database *Database::GetInstance()
         database_ = new Database();
     }
     return database_;
+}
+
+User *Database::getLoginedUser()
+{
+    return m_loginedUser;
 }

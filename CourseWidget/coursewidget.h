@@ -13,6 +13,7 @@
 #include <QObject>
 
 #include "test.h"
+#include "database.h"
 
 
 
@@ -40,6 +41,7 @@ private:
 
     std::vector<Test> m_tests;
     Test *test;
+    User *m_loginedUser;
 
 };
 

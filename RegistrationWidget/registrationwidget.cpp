@@ -20,11 +20,15 @@ RegistrationWidget::RegistrationWidget(QWidget *pwgt) : QWidget(pwgt)
 QString RegistrationWidget::registerUser(const QString name,const QString surname,const QString login,
                                          const QString email,const QString password,const QString avatar)
 {
-    User newUser = {name, surname, login, email, password, avatar};
+    User newUser;
+    newUser.name = name;
+    newUser.surname = surname;
+    newUser.login = login;
+    newUser.email = email;
+    newUser.password = password;
+    newUser.avatar = avatar;
     return Database::GetInstance()->registerUser(newUser);
 }
-
-#include <QDebug>
 
 QString RegistrationWidget::loginUser(const QString login, const QString password)
 {

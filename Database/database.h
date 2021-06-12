@@ -7,6 +7,7 @@
 
 
 struct User{
+    int id = -1;
     QString name;
     QString surname;
     QString login;
@@ -29,6 +30,7 @@ public:
 
     //Class functions
     static Database* GetInstance();
+    static User* getLoginedUser();
 
 protected:
     Database();
@@ -36,6 +38,8 @@ protected:
     QSqlDatabase m_db;
 
 private:
+
+    static User *m_loginedUser;
 };
 
 #endif // DATABASE_H
