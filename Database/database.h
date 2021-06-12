@@ -25,7 +25,7 @@ public:
     QString loginUser(User user);
     bool isUserExist(User user);
     bool isEmailExist(User user);
-
+    static void logout();
 
 
     //Class functions

@@ -10,6 +10,13 @@ Rectangle{
     signal openRegistration()
     signal openReset();
     signal succesLogin();
+
+    function clear(){
+        console.log("clear")
+        username.text = ""
+        password.text = ""
+    }
+
     color: "lightgray"
 
     Item{
@@ -192,6 +199,9 @@ Rectangle{
         if(res !== "success"){
             messageError.text = res
             messageError.open()
+        }else{
+            loader.sourceComponent = undefined
+            loader.source = "qrc:/forms/forms/LoginForm.qml"
         }
     }
 

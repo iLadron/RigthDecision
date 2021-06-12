@@ -45,7 +45,9 @@ QString Database::loginUser(User user)
     QSqlRecord rec = query.record();
     query.next();
 
-    m_loginedUser = new User();
+    if(m_loginedUser == nullptr){
+        m_loginedUser = new User();
+    }
 
     m_loginedUser->id = query.value(rec.indexOf("id")).toInt();
     m_loginedUser->avatar = query.value(rec.indexOf("avatar")).toString();
@@ -81,6 +83,11 @@ bool Database::isEmailExist(User user)
     return query.size();
 }
 
+void Database::logout()
+{
+    m_loginedUser = nullptr;
+}
+
 
 Database::Database()
 {
@@ -102,7 +109,7 @@ User* Database::m_loginedUser = nullptr;
 Database *Database::GetInstance()
 {
     if(database_ == nullptr){
-        database_ = new Database();
+        database_ = new Database();        
     }
     return database_;
 }

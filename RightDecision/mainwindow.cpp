@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(userPageWidget, SIGNAL(openMainWindow()), this, SLOT(openMainPage()));
     connect(userPageWidget, SIGNAL(openCreateCourseWidget()), this, SLOT(openCourse()));
     connect(courseWidget, SIGNAL(openLK()), this, SLOT(openLKPage()));
+    connect(userPageWidget, SIGNAL(logout()), this, SLOT(logout()));
 
 
     //События
@@ -71,7 +72,7 @@ MainWindow::~MainWindow()
 void MainWindow::openLogin()
 {
     clearLayout(layout);
-    //layout->addWidget(regWidget);
+    regWidget->setVisible(true);
     w->setLayout(layout);
     setCentralWidget(w);
 }
@@ -116,6 +117,12 @@ void MainWindow::clearLayout(QLayout *layout) {
 void MainWindow::afterLoginSuccsess()
 {
     userPageWidget->setUser({});
+}
+
+void MainWindow::logout()
+{
+    Database::logout();
+    openLogin();
 }
 
 void MainWindow::on_pushButton_clicked()

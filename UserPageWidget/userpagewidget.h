@@ -31,6 +31,7 @@ public slots:
 signals:
     void openMainWindow();
     void openCreateCourseWidget();
+    void logout();
 
     void userChanged(QStringList user);
 

@@ -38,6 +38,8 @@ public slots:
     //После удачного логина
     void afterLoginSuccsess();
 
+    //
+    void logout();
 
 
 private slots:

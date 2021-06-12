@@ -24,8 +24,8 @@ Item {
                 src = "qrc:/forms/forms/LoginForm.qml";
             }
             return src;
-
         }
+
 
 
         onLoaded: {            
@@ -43,7 +43,6 @@ Item {
                 break;
             default:
             }
-
         }
 
         function openLogin(){
