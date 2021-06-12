@@ -94,12 +94,6 @@ Database::Database()
         qDebug()<<"Error. Can't open database";
         qDebug()<<m_db.lastError();
     }
-
-    QStringList s = m_db.tables();
-
-    foreach(QString str, s){
-        qDebug()<<"Table " <<str;
-    }
 }
 
 Database* Database::database_ = nullptr;
