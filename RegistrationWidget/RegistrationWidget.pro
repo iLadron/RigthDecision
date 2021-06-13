@@ -29,6 +29,11 @@ RESOURCES += \
     qml.qrc
 
 DISTFILES += \
+    ../../../../../Загрузки/Telegram Desktop/RangePicker/Calendars.qml \
+    ../../../../../Загрузки/Telegram Desktop/RangePicker/Clockface.qml \
+    ../../../../../Загрузки/Telegram Desktop/RangePicker/MyClock.qml \
+    ../../../../../Загрузки/Telegram Desktop/RangePicker/RangeCalendar.qml \
+    ../../../../../Загрузки/Telegram Desktop/RangePicker/RangePicker.qml \
     forms/LoginForm.qml \
     forms/MainLogReg.qml \
     forms/RegistrationForm.qml \

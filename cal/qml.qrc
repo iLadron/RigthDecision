@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>RangePicker/Calendars.qml</file>
+        <file>RangePicker/Clockface.qml</file>
+        <file>RangePicker/MyClock.qml</file>
+        <file>RangePicker/RangeCalendar.qml</file>
+        <file>RangePicker/RangePicker.qml</file>
+    </qresource>
+</RCC>

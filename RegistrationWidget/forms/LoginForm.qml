@@ -3,8 +3,8 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3
 
-
 Rectangle{
+
 
     id:control
     signal openRegistration()
@@ -78,26 +78,28 @@ Rectangle{
                 selectByMouse: true
                 placeholderText: qsTr("Пароль")
             }
+
+
             Rectangle{
                 id:button
                 width: parent.width
                 height: parent.height/reg.children.length - 20
                 color: "green"
+
                 Label{
                     anchors.centerIn: parent
-                    text: qsTr("Войти")
+                    text: qsTr("Вход")
                     color: "white"
                 }
 
-
                 MouseArea{
                     id:buttonArea
-                    signal tryLog(string login, string password)
                     anchors.fill: parent
                     onClicked: {
                         control.login();
                     }
                 }
+
             }
             Rectangle{
                 id:newAccount
