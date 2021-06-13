@@ -6,7 +6,7 @@ import QtQuick.Dialogs 1.3
 Rectangle{
     id:control
 
-    signal openCourseCreator()
+    signal openCourseCreator()    
     color: "lightgray"
 
 
@@ -55,6 +55,30 @@ Rectangle{
         }
     }
 
+
+    Rectangle{
+        id:btnSaveTest;
+        width: 200
+        height: 100
+        anchors.left: btnСreateQuestion.right
+        anchors.leftMargin: 10
+        color: "green"
+        Label{
+            anchors.centerIn: parent
+            text: qsTr("Сохранить тест")
+            color: "white"
+        }
+
+
+        MouseArea{
+            id:maSaveTest
+            anchors.fill: parent
+            onClicked: {
+                Form.saveTest();
+                openCourseCreator();
+            }
+        }
+    }
 
     ListView{
         id:list

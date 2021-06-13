@@ -22,12 +22,14 @@ class TEST_EXPORT Test : public QAbstractListModel
 {
 public:
     Test();
+    Test(const Test& test);
     enum testRole{
         QuestionRole = Qt::UserRole + 1,
         AnswersRole
     };
 
     std::vector<Question> questions() const;
+    void clear();
 
 
 

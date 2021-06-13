@@ -27,6 +27,7 @@ public:
 
 public slots:
     void addQuestin(const QString& question, const QStringList& answers, int rightAnswer);
+    void saveTest();
 
 
 signals:
@@ -40,7 +41,7 @@ private:
     QQmlContext *m_courseContext;
 
     std::vector<Test> m_tests;
-    Test *test;
+    Test temp_test;
     User *m_loginedUser;
 
 };

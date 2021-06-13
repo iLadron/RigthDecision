@@ -7,9 +7,19 @@ Test::Test()
     qDebug()<< "testSize: " << m_questions.size();
 }
 
+Test::Test(const Test &test)
+{
+    this->m_questions = test.questions();
+}
+
 std::vector<Question> Test::questions() const
 {
     return m_questions;
+}
+
+void Test::clear()
+{
+    m_questions.clear();
 }
 
 void Test::AddTest(const QString& question, const QStringList& answers, int rightAnswer)
