@@ -13,14 +13,16 @@ SOURCES += \
     courseelement.cpp \
     coursemodel.cpp \
     coursewidget.cpp \
-    test.cpp
+    test.cpp \
+    theorymodel.cpp
 
 HEADERS += \
     CourseWidget_global.h \
     courseelement.h \
     coursemodel.h \
     coursewidget.h \
-    test.h
+    test.h \
+    theorymodel.h
 
 TRANSLATIONS += \
     CourseWidget_ru_RU.ts

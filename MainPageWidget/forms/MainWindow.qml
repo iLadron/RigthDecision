@@ -7,7 +7,7 @@ import QtQuick.Dialogs 1.3
 Rectangle{
 
     id:control
-    color: "lightgray"
+    color: "#91d0dc"
 
     Label{
         width: 100
@@ -20,8 +20,8 @@ Rectangle{
     Rectangle{
         id:btnLK
         width: 200
-        height: 100
-        color: "green"
+        height: 30
+        color: maLK.containsMouse ? "#1bd31b" : "green"
         Label{
             anchors.centerIn: parent
             text: qsTr("Личный каибнет")
@@ -32,6 +32,7 @@ Rectangle{
         MouseArea{
             id:maLK
             anchors.fill:parent
+            hoverEnabled: true
             onClicked: {
                 console.log("open LK");
                 Form.openLK();

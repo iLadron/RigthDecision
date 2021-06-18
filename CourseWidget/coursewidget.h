@@ -15,6 +15,7 @@
 #include "coursemodel.h"
 #include "courseelement.h"
 #include "test.h"
+#include "theorymodel.h"
 
 
 

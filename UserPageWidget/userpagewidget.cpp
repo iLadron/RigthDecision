@@ -14,58 +14,7 @@ UserPageWidget::UserPageWidget(QWidget * pwdt) : QWidget(pwdt)
 
     setLayout(m_mainLayout);
 
-    /*
-    CourseModel model;
-
-    model.setData("First Course", "Andrey", "My first Test course");
-
-    CourseEl el;
-    el.type = "Пробный тип1";
-    el.name = "Пробное имя1";
-    el.result = "test result1";
-    el.endDate = "test date1";
-
-    model.addElement(el);
-
-    el.type = "Пробный тип2";
-    el.name = "Пробное имя2";
-    el.result = "test result2";
-    el.endDate = "test date2";
-
-    model.addElement(el);
-
-    el.type = "Пробный тип3";
-    el.name = "Пробное имя3";
-    el.result = "test result3";
-    el.endDate = "test date3";
-    model.addElement(el);
-
-    m_createdCourses.push_back(model);
-
-    model.setData("second Course", "Andrey2", "My second Test course");
-
-    el.type = "Пробный тип1";
-    el.name = "Пробное имя1";
-    el.result = "test result1";
-    el.endDate = "test date1";
-
-    model.addElement(el);
-
-    el.type = "Пробный тип2";
-    el.name = "Пробное имя2";
-    el.result = "test result2";
-    el.endDate = "test date2";
-
-    model.addElement(el);
-
-    el.type = "Пробный тип3";
-    el.name = "Пробное имя3";
-    el.result = "test result3";
-    el.endDate = "test date3";
-    model.addElement(el);
-    m_createdCourses.push_back(model);
-*/
-}
+ }
 
 QStringList UserPageWidget::user() const
 {
@@ -87,23 +36,29 @@ void UserPageWidget::setUser(QStringList user)
 }
 
 void UserPageWidget::refreshCourses()
-{
+{    
     m_inProgressCourses.clear();
     m_createdCourses.clear();
 
     QSqlQuery inProgressQuery = Database::getInProgressCourses();
-
     QSqlRecord rec = inProgressQuery.record();
 
     while (inProgressQuery.next()) {
 
         CourseModel tempModel;
+
+
         User tempAuthor = Database::getUserById(inProgressQuery.value(rec.indexOf("idAuthor")).toInt());
 
         QSqlQuery tempTestProgress = Database::getTestsByCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
-
         QSqlRecord tempRec = tempTestProgress.record();
 
+        QSqlQuery tempCourseInfo = Database::getCourseInfoByCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
+        QSqlRecord tempCourseInfoRec = tempCourseInfo.record();
+        tempCourseInfo.next();
+
+        QStringList tempMarks = tempCourseInfo.value(tempCourseInfoRec.indexOf("marks")).toString().split(';');
+        int counterMarks = 0;
 
         while (tempTestProgress.next()) {
             Test tempTest;
@@ -112,6 +67,7 @@ void UserPageWidget::refreshCourses()
             QStringList rightAnswersNumbers = tempTestProgress.value(tempRec.indexOf("rightAnswerNumbers")).toString().split(';');
             tempTest.setName(tempTestProgress.value(tempRec.indexOf("name")).toString());
             tempTest.setType("Тест");
+            tempTest.setResult(tempMarks[counterMarks++]);
             for (int i = 0; i < questions.size();i++){
                 QStringList answersSeperated;
                 for(int j = 0+(i*4); j < 4+(i*4);j++){
@@ -123,11 +79,29 @@ void UserPageWidget::refreshCourses()
         }
 
 
+        QSqlQuery theoryQuery = Database::getTheoryByCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
+        QSqlRecord theoryRec = theoryQuery.record();
+        while(theoryQuery.next()){
+
+            TheoryModel tempTheory;
+            tempTheory.setType("Теория");
+            tempTheory.setName(theoryQuery.value(theoryRec.indexOf("name")).toString());
+            tempTheory.setTheory(theoryQuery.value(theoryRec.indexOf("text")).toString());
+
+            tempModel.addElement(tempTheory);
+
+        }
+
         tempModel.setData(inProgressQuery.value(rec.indexOf("name")).toString(),
                           tempAuthor,
                           inProgressQuery.value(rec.indexOf("shortDescription")).toString(),
                           inProgressQuery.value(rec.indexOf("rating")).toDouble());
+
+        tempModel.setDateBegin(tempCourseInfo.value(tempCourseInfoRec.indexOf("dateBegin")).toString());
+        tempModel.setIsComplete(tempCourseInfo.value(tempCourseInfoRec.indexOf("isCompleted")).toInt() == 1);
         m_inProgressCourses.push_back(tempModel);
+
+        tempModel.resetModel();
 
     }
 
@@ -169,6 +143,7 @@ void UserPageWidget::refreshCourses()
         m_createdCourses.push_back(tempModel);
 
     }
+
 
 }
 

@@ -7,14 +7,14 @@ Rectangle{
     id:control
 
     signal openTestCreator()
-    color: "lightgray"
+    color: "#91d0dc"
 
 
     Rectangle{
         id:btnOpenLK
-        width: 200
-        height: 100
-        color: "green"
+        width: 100
+        height: 30
+        color: maOpenLK.containsMouse ? "#1bd31b" : "green"
         Label{
             anchors.centerIn: parent
             text: qsTr("Личный кабинет")
@@ -24,6 +24,7 @@ Rectangle{
 
         MouseArea{
             id:maOpenLK
+            hoverEnabled: true
             anchors.fill: parent
             onClicked: {
                 console.log("openLK")
@@ -35,11 +36,11 @@ Rectangle{
 
     Rectangle{
         id:btnСreateTest
-        width: 200
-        height: 100
+        width: 100
+        height: 30
         anchors.left:btnOpenLK.right
         anchors.leftMargin: 10
-        color: "green"
+        color: maCourseCreator.containsMouse ? "#1bd31b" : "green"
         Label{
             anchors.centerIn: parent
             text: qsTr("Создать тест")
@@ -50,6 +51,7 @@ Rectangle{
         MouseArea{
             id:maCourseCreator
             anchors.fill: parent
+            hoverEnabled: true
             onClicked: {
                 console.log("openTest")
                 openTestCreator();
@@ -60,7 +62,7 @@ Rectangle{
 
     Label{
         width: 100
-        height: 100
+        height: 30
         anchors.centerIn: parent
         text: "заготовочка для меню создания курса"
     }

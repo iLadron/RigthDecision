@@ -9,7 +9,11 @@ Test::Test()
 
 Test::Test(const Test &test)
 {
-    this->m_questions = test.questions();
+    m_questions = test.questions();
+    setDateEnd(test.dateEnd());
+    setName(test.name());
+    setResult(test.result());
+    setType(test.type());
 }
 
 std::vector<Question> Test::questions() const
@@ -34,6 +38,29 @@ void Test::addQuestion(const QString& question, const QStringList& answers, int 
     endResetModel();
 
     qDebug()<<"TestSize " << m_questions.size();
+}
+
+void Test::check(QList<int> arrayRes)
+{
+    int result = 0;
+    for(int i = 0; i <arrayRes.size();i++){
+        if(arrayRes[i] == 3)
+            arrayRes[i] = 2;
+        if(arrayRes[i] == 5)
+            arrayRes[i] = 3;
+        if(arrayRes[i] == 7)
+            arrayRes[i] = 4;
+    }
+    for(int i = 0; i < m_questions.size(); i++){
+        if(arrayRes[i] == m_questions[i].m_rightAnswer){
+            result++;
+        }
+    }
+
+    double tempa = (static_cast<double>(result)/static_cast<double>(m_questions.size())) * 5;
+    beginResetModel();
+        setResult(QString::number(ceil(tempa)));
+    endResetModel();
 }
 
 

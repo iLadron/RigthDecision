@@ -4,6 +4,7 @@ CourseWidget::CourseWidget(QWidget *pwgt) : QWidget(pwgt)
 {
 
     //Creating CourseForm
+
     m_courseWidget = new QQuickWidget(QUrl("qrc:/forms/forms/MainCourseForm.qml"));
     m_courseWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
   //  temp_test = new Test();
@@ -12,35 +13,10 @@ CourseWidget::CourseWidget(QWidget *pwgt) : QWidget(pwgt)
     m_mainLayout->addWidget(m_courseWidget);
 
     m_courseContext = m_courseWidget->rootContext();
-    //m_courseContext->setContextProperty("Path", QDir::currentPath()+ "/../CourseWidget/forms/");
-    //m_courseContext->setContextProperty("testModel", &temp_test);
+    m_courseContext->setContextProperty("Form",this);
+
     setLayout(m_mainLayout);
 
-
-    /*
-    CourseEl el;
-    el.type = "Пробный тип1";
-    el.name = "Пробное имя1";
-    el.result = "test result1";
-    el.endDate = "test date1";
-
-    m_courseModel->addElement(el);
-
-    el.type = "Пробный тип2";
-    el.name = "Пробное имя2";
-    el.result = "test result2";
-    el.endDate = "test date2";
-
-    m_courseModel->addElement(el);
-
-    el.type = "Пробный тип3";
-    el.name = "Пробное имя3";
-    el.result = "test result3";
-    el.endDate = "test date3";
-
-    m_courseModel->addElement(el);
-
-*/
 
 }
 
@@ -51,30 +27,41 @@ int CourseWidget::windowState() const
 
 void CourseWidget::setCourseModel(CourseModel * model)
 {
+    /*
     if(m_courseModel != nullptr){
         delete m_courseModel;
         m_courseModel = nullptr;
     }
+    */
     m_courseModel = new CourseModel(*model);
     connect(m_courseModel, SIGNAL(openElement(int)),this,SLOT(openElement(int)));
     m_courseContext->setContextProperty("CourseModel", m_courseModel);
 
-    m_courseContext->setContextProperty("Form",this);
 
     setWindowState(2);
 }
 
 void CourseWidget::openElement(int index)
 {
-    CourseElement* element = m_courseModel->getElementByIndex(index);
-    if(element->type() == "Тест"){
-        Test* testElement = static_cast<Test*>(element);
+    if(index < m_courseModel->getTheorySize()){
+        TheoryModel* theoryElement = m_courseModel->getTheoryByIndex(index);
+        m_courseContext->setContextProperty("TheoryModel", theoryElement);
+        m_courseContext->setContextProperty("TheoryName", theoryElement->name());
+        m_courseContext->setContextProperty("TheoryText", theoryElement->theory());
+
+        connect(theoryElement, SIGNAL(learnedSignal()),m_courseModel,SLOT(resetModel()));
+
+        setWindowState(4);
+    }else{
+        Test* testElement = m_courseModel->getTestByIndex(index-m_courseModel->getTheorySize());
+
         m_courseContext->setContextProperty("TestModel", testElement);
         m_courseContext->setContextProperty("TestName", testElement->name());
-        m_courseContext->setContextProperty("Form",this);
 
         setWindowState(3);
     }
+
+
 }
 
 void CourseWidget::setWindowState(int windowState)
@@ -85,6 +72,7 @@ void CourseWidget::setWindowState(int windowState)
     m_windowState = windowState;
     emit windowStateChanged(m_windowState);
 }
+
 
 //void CourseWidget::addQuestin(const QString &question, const QStringList &answers, int rightAnswer)
 //{

@@ -7,14 +7,14 @@ Rectangle{
     id:control
 
     signal openCourseCreator()    
-    color: "lightgray"
+    color: "#91d0dc"
 
 
     Rectangle{
         id:btnСreateCourse;
         width: 200
         height: 100
-        color: "green"
+        color: maCourseCreator.containsMouse ? "#1bd31b" : "green"
         Label{
             anchors.centerIn: parent
             text: qsTr("Назад к созданию курса")
@@ -23,8 +23,9 @@ Rectangle{
 
 
         MouseArea{
-            id:maCourseCreator
+            id:maCourseCreator            
             anchors.fill: parent
+            hoverEnabled: true
             onClicked: {
                 openCourseCreator();
             }
@@ -39,7 +40,7 @@ Rectangle{
         anchors.leftMargin: 10
         width: 200
         height: 100
-        color: "green"
+        color: maCourseCreator.containsMouse ? "#1bd31b" : "green"
         Label{
             anchors.centerIn: parent
             text: qsTr("Добавить вопрос")
@@ -48,6 +49,8 @@ Rectangle{
 
 
         MouseArea{
+            id:maCreateQuestion
+            hoverEnabled: true
             anchors.fill: parent
             onClicked: {
                 addQuestion.visible = true
@@ -62,7 +65,7 @@ Rectangle{
         height: 100
         anchors.left: btnСreateQuestion.right
         anchors.leftMargin: 10
-        color: "green"
+        color: maSaveTest.containsMouse ? "#1bd31b" : "green"
         Label{
             anchors.centerIn: parent
             text: qsTr("Сохранить тест")
@@ -73,6 +76,7 @@ Rectangle{
         MouseArea{
             id:maSaveTest
             anchors.fill: parent
+            hoverEnabled: true
             onClicked: {
                 Form.saveTest();
                 openCourseCreator();
@@ -262,7 +266,7 @@ Rectangle{
                     id:btnСancel
                     width: 200
                     height: 30
-                    color: "green"
+                    color: maCancel.containsMouse ? "#1bd31b" : "green"
                     Label{
                         anchors.centerIn: parent
                         text: qsTr("Отмена")
@@ -271,6 +275,8 @@ Rectangle{
 
 
                     MouseArea{
+                        id:maCancel
+                        hoverEnabled: true
                         anchors.fill: parent
                         onClicked: {
                             addQuestion.visible = false
@@ -282,7 +288,7 @@ Rectangle{
                     id:btnAddQuestion;
                     width: 200
                     height: 30
-                    color: "green"
+                    color: buttonArea.containsMouse ? "#1bd31b" : "green"
                     Label{
                         anchors.centerIn: parent
                         text: qsTr("Добавить вопрос")
@@ -292,9 +298,9 @@ Rectangle{
 
                     MouseArea{
                         anchors.fill: parent
+                        id:maAddQuestion
+                        hoverEnabled: true
                         onClicked: {
-
-
                             //TODO: Add Question Logic
 
 

@@ -7,8 +7,8 @@
 #include <QAbstractItemModel>
 #include <QFlags>
 
-#include "courseelement.h"
 #include "test.h"
+#include "theorymodel.h"
 #include "database.h"
 
 
@@ -38,10 +38,13 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
 
     void addElement(CourseElement);
+    void addElement(Test);
+    void addElement(TheoryModel);
     void addTest(const QString& question, const QStringList& answers, int rightAnswer);
     void setData(const QString& name, const User& author, const QString& description, int rating);
 
-    CourseElement* getElementByIndex(int index);
+    Test* getTestByIndex(int index);
+    TheoryModel* getTheoryByIndex(int index);
 
     QString name() const;
 
@@ -50,6 +53,16 @@ public:
     bool isCreator() const;
 
     QString authorName() const;
+
+    QString getDateBegin() const;
+    void setDateBegin(const QString &dateBegin);
+
+    bool getIsComplete() const;
+    void setIsComplete(bool isComplete);
+
+    int getTheorySize();
+    int getTestsSize();
+
 
 public slots:
     QString getData();
@@ -61,6 +74,8 @@ public slots:
     void setIsCreator(bool isCreator);
 
     void setAuthorName(QString authorName);
+
+    void resetModel();
 
 signals:
     void nameChanged(QString name);
@@ -74,8 +89,8 @@ signals:
     void openElement(int index);
 
 private:
-    std::vector<CourseElement> m_elements;
-
+    std::vector<Test> m_tests;
+    std::vector<TheoryModel> m_theories;
 
     QString m_name;
     User m_author;
@@ -88,6 +103,9 @@ private:
 
     bool m_isCreator;
     QString m_authorName;
+
+    QString m_dateBegin;
+    bool m_isComplete;
 };
 
 #endif // COURSEMODEL_H

@@ -172,3 +172,23 @@ QSqlQuery Database::getTestsByCourseId(int id)
     query.exec(res);
     return query;
 }
+
+QSqlQuery Database::getTheoryByCourseId(int id)
+{
+    QSqlQuery query;
+    QString res;
+    QString strCommand = "SELECT * FROM Theory WHERE idCourse = '%1'";
+    res = strCommand.arg(id);
+    query.exec(res);
+    return query;
+}
+
+QSqlQuery Database::getCourseInfoByCourseId(int id)
+{
+    QSqlQuery query;
+    QString res;
+    QString strCommand = "SELECT * FROM UserHasCourse WHERE idCourse = '%1' AND idUser = '%2'";
+    res = strCommand.arg(id).arg(m_loginedUser->id);
+    query.exec(res);
+    return query;
+}

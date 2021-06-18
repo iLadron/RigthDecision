@@ -6,7 +6,7 @@ import QtQuick.Dialogs 1.3
 
 
 Rectangle{
-    color: "lightgray"
+    color: "#91d0dc"
 
     signal openLogin()
 
@@ -19,10 +19,10 @@ Rectangle{
             border.color: "blue"
         }
 
-        anchors.fill:parent
-        //anchors.centerIn: parent
-        //width: 400
-        //height: 500
+        //anchors.fill:parent
+        anchors.centerIn: parent
+        width: 400
+        height: 400
 
 
         ColumnLayout{
@@ -130,9 +130,9 @@ Rectangle{
                 spacing: 10
 
                 Rectangle{
-                    Layout.fillHeight: true
+                    implicitHeight: reg.height/7 - 20
                     Layout.fillWidth: true
-                    color: "green"
+                    color: buttonArea.containsMouse ? "#1bd31b" : "green"
 
                     Label{
                         anchors.centerIn: parent
@@ -143,6 +143,7 @@ Rectangle{
                     MouseArea{
                         id:buttonArea
                         signal tryLog(string login, string password)
+                        hoverEnabled: true
                         anchors.fill: parent
                         onClicked: {
                             console.log("back");
@@ -153,9 +154,9 @@ Rectangle{
                 }
 
                 Rectangle{
-                    Layout.fillHeight: true
+                    implicitHeight: reg.height/7 - 20
                     Layout.fillWidth: true
-                    color: "green"
+                    color: buttonArea2.containsMouse ? "#1bd31b" : "green"
                     Label{
                         anchors.centerIn: parent
                         text: qsTr("Зарегестрироваться")
@@ -165,6 +166,7 @@ Rectangle{
                     MouseArea{
                         id:buttonArea2
                         signal tryLog(string login, string password)
+                        hoverEnabled: true
                         anchors.fill: parent
                         onClicked: {
                             console.log(username.text + " " + password.text)

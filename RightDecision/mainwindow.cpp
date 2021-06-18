@@ -103,6 +103,8 @@ void MainWindow::openLKPage()
     userPageWidget->setVisible(true);
     w->setLayout(layout);
     setCentralWidget(w);
+    userPageWidget->refreshCourses();
+
 }
 
 void MainWindow::clearLayout(QLayout *layout) {
@@ -120,6 +122,7 @@ void MainWindow::clearLayout(QLayout *layout) {
 void MainWindow::afterLoginSuccsess()
 {
     userPageWidget->setUser({});
+
 }
 
 void MainWindow::logout()

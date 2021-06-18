@@ -51,6 +51,10 @@ public:
     static QSqlQuery getCreatedCourses();
 
     static QSqlQuery getTestsByCourseId(int id);
+    static QSqlQuery getTheoryByCourseId(int id);
+
+
+    static QSqlQuery getCourseInfoByCourseId(int id);
 
 
 protected:

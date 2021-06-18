@@ -1,20 +1,24 @@
-//import QtQuick 2.15
+import QtQuick 2.15
 import QtQuick.Layouts 1.15
-//import QtQuick.Controls 2.15
+import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3
 
-import QtQuick 2.1
-import QtQuick.Controls 1.0
+//import QtQuick 2.1
+//import QtQuick.Controls 1.0
 
 
 
 
 Rectangle{
     id:control
+    color: "#91d0dc"
 
+
+    anchors.leftMargin: 10
     Label{
+        id:lblHeader
         width: 100
-        height: 100
+        height: 20
         MouseArea{
             anchors.fill: parent
             onClicked: {
@@ -28,10 +32,13 @@ Rectangle{
 
     ListView{
         id:list
-        x:200
-        y:200
-        width: 400
-        height: 200
+        clip: true
+
+        anchors.left: parent.left
+        anchors.top: lblHeader.bottom
+        anchors.bottom: rowButtons.top;
+        anchors.right: parent.right
+        anchors.leftMargin: 10
 
         Rectangle{
             id:listBorder
@@ -45,22 +52,27 @@ Rectangle{
 
 
         delegate: RowLayout{
-
-
             GridLayout{
                 id:gridTest1
 
                 rows: 5
                 columns: 2
 
-                Label{
-                    id:answer
-                    text:model.Question
+                Rectangle{
+                    color: "transparent"
                     Layout.columnSpan: 2
-                }
+                    Layout.topMargin: 20
+                    Layout.leftMargin: 40
+                    implicitHeight: 20
 
+                    Label{
+                        id:answer
+                        text:model.Question
+                        anchors.leftMargin: 100
+                    }
+                }
                 RadioButton {
-                    id:rb11
+                    id:rb1
                 }
 
                 Label{
@@ -69,18 +81,22 @@ Rectangle{
 
 
                 RadioButton {
+                    id:rb2
                 }
                 Label{
                     text:model.Answers[1]
                 }
 
                 RadioButton {
+                    id: rb3
                 }
                 Label{
                     text:model.Answers[2]
                 }
 
                 RadioButton {
+                    id:rb4
+
                 }
                 Label{
                     text:model.Answers[3]
@@ -88,6 +104,77 @@ Rectangle{
             }
 
 
+        }
+    }
+
+    Row{
+        id:rowButtons
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: 30
+        spacing: 10
+        anchors.leftMargin: 10
+
+        Rectangle{
+            id:btnComplete
+            width: 200
+            height: 30
+            color: mabtnComplete.containsMouse ? "#1bd31b" : "green"
+            Label{
+                anchors.centerIn: parent
+                text: qsTr("Завершить тест")
+                color: "white"
+            }
+
+
+            MouseArea{
+                id:mabtnComplete
+                hoverEnabled: true
+                anchors.fill: parent
+                onClicked: {
+                    console.log("Завершить тест ")
+                    var arrayRes = new Array;
+
+                    for(var i = 0; i <list.count; i++){
+                        console.log(list.itemAtIndex(i).children[0].children[1]);
+                        for(var j = 1; j < 9; j+=2){
+                            console.log(list.itemAtIndex(i).children[0].children[j].checked);
+                            if(list.itemAtIndex(i).children[0].children[j].checked){
+                                arrayRes.push(j);
+                                break;
+                            }
+                        }
+                    }
+
+                    TestModel.check(arrayRes);
+                    Form.setWindowState(2)
+                }
+            }
+        }
+
+        Rectangle{
+            id:btnLeave
+            width: 200
+            height: 30
+            color: maLeave.containsMouse ? "#1bd31b" : "green"
+            Label{
+                anchors.centerIn: parent
+                text: qsTr("Покинуть тест")
+                color: "white"
+            }
+
+
+            MouseArea{
+                id:maLeave
+                hoverEnabled: true
+                anchors.fill: parent
+                onClicked: {
+                    console.log("Покинуть тест")
+
+                    Form.setWindowState(2)
+                }
+            }
         }
     }
 

@@ -88,7 +88,7 @@ Rectangle{
                 id:button
                 width: parent.width
                 height: parent.height/reg.children.length - 20
-                color: buttonArea.containsMouse ? "yellow" : "green"
+                color: buttonArea.containsMouse ? "#1bd31b" : "green"
 
                 Label{
                     anchors.centerIn: parent
@@ -128,6 +128,7 @@ Rectangle{
                         anchors.left: lblLeftNew.right
                         text: qsTr("  Создать аккаунт")
                         Layout.fillWidth: false
+                        Layout.bottomMargin: 10
                         color: "blue"
 
                         MouseArea{
@@ -139,47 +140,6 @@ Rectangle{
                                 console.log("Create new account");
                                 openRegistration();
                             }
-                        }
-                    }
-                }
-            }
-
-            Rectangle{
-                id:forget
-                anchors.topMargin: -50
-                anchors.bottomMargin: 10
-                width: parent.width
-                height: parent.height/reg.children.length - 20
-                color: "transparent"
-                Layout.bottomMargin: 14
-                Layout.topMargin: -13
-                Item{
-                    anchors.centerIn:parent
-                    width: lblLeftForget.width+lblRightForget.width
-                    height: lblLeftForget.height
-                    Label{
-                        id:lblLeftForget
-                        text: qsTr("Забыли пароль?")
-                        Layout.fillWidth: false
-                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                        color: "grey"
-                    }
-
-                    Label{
-                        id:lblRightForget
-                        anchors.left: lblLeftForget.right
-                        text: qsTr(" Восстановление")
-                        Layout.fillWidth: false
-                        color: "blue"
-                    }
-
-                    MouseArea{
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: lblRightForget.color = "grey"
-                        onExited: lblRightForget.color = "blue"
-                        onClicked: {
-                            openReset();
                         }
                     }
                 }

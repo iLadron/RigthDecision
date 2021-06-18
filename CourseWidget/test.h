@@ -7,6 +7,10 @@
 #include <QStringList>
 #include <QAbstractItemModel>
 #include <QFlags>
+#include <QList>
+#include <math.h>
+
+
 
 #include "courseelement.h"
 #include <QObject>
@@ -22,7 +26,7 @@ struct Question{
 class Test : public QAbstractListModel, public CourseElement
 {
 
-
+    Q_OBJECT
 public:
     Test();
     Test(const Test& test);
@@ -43,6 +47,7 @@ public:
 
 public slots:
      void addQuestion(const QString& question, const QStringList& answers, int rightAnswer);
+     void check(QList<int> arrayRes);
 
 
 

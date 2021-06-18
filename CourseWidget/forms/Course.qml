@@ -1,4 +1,6 @@
-//import QtQuick 2.15
+//
+//
+////import QtQuick 2.15
 import QtQuick.Layouts 1.15
 //import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3
@@ -11,8 +13,8 @@ import QtQuick.Controls 1.0
 
 Rectangle{
     id:control
+    color: "#91d0dc"
 
-    property var nameee: CourseModel.name
 
     Column{
         id:colCourseData
@@ -22,15 +24,9 @@ Rectangle{
           height: 30
           text: {
 
-              return "Название: " + nameee;
+              return "Название: " + CourseModel.name
           }
 
-          MouseArea{
-              anchors.fill: parent
-              onClicked: {
-                  console.log(CourseModel.name)
-              }
-          }
       }
 
       Label{
@@ -55,9 +51,13 @@ Rectangle{
     }
 
     TableView{
+        id:tableTest
         anchors.top: colCourseData.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.leftMargin: 10
+        //anchors.left: parent.left
+        //anchors.right: parent.right
+        width: 300
+        anchors.bottom: btnOpenLK.top
         model: CourseModel
 
        TableViewColumn{
@@ -79,29 +79,71 @@ Rectangle{
            width: 100
        }
 
-
+/*
        TableViewColumn{
            role: "DataEnd"
            title: "Дедлайн"
            width: 100
        }
+*/
 
        itemDelegate: Rectangle{
            implicitWidth: 100
            implicitHeight: 20
            border.color: "red"
-           border.width: 1
+           border.width: 0
            Label{
-               text: styleData.value
+               text: {
+                   if(styleData.value == -1){
+                        return "Не пройден";
+                   }
+                   if(styleData.value ==""){
+                       return "Не изучен"
+                   }
+
+                   return styleData.value
+               }
            }
            MouseArea{
                anchors.fill: parent
                onClicked: {
-                   CourseModel.openElement(0);
+                   console.log("cloickafas")
+                   if(styleData.value != "Не пройден" && styleData.value != -1 && styleData.value != "")
+                       return;
+                   console.log("cl2222as")
+
+                   CourseModel.openElement(styleData.row);
                }
            }
        }
     }
 
+    Rectangle{
+        id:btnOpenLK
+        width: 200
+        height: 30
+        anchors.topMargin: 20
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 10
+        anchors.bottom: parent.bottom
+        color: maOpenLK.containsMouse ? "#1bd31b" : "green"
+        Label{
+            anchors.centerIn: parent
+            text: qsTr("Личный кабинет")
+            color: "white"
+        }
+
+
+        MouseArea{
+            id:maOpenLK
+            hoverEnabled: true
+            anchors.fill: parent
+            onClicked: {
+                console.log("openLK")
+
+                Form.openLK();
+            }
+        }
+    }
 
 }

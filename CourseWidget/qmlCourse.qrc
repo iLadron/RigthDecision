@@ -5,5 +5,7 @@
         <file>forms/TestMaker.qml</file>
         <file>forms/Course.qml</file>
         <file>forms/Test.qml</file>
+        <file>forms/Theory.qml</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>
