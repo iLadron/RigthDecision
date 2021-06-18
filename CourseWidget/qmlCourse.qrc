@@ -3,5 +3,7 @@
         <file>forms/CourseMaker.qml</file>
         <file>forms/MainCourseForm.qml</file>
         <file>forms/TestMaker.qml</file>
+        <file>forms/Course.qml</file>
+        <file>forms/Test.qml</file>
     </qresource>
 </RCC>

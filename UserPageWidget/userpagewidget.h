@@ -9,9 +9,13 @@
 #include <QQmlContext>
 #include <QVBoxLayout>
 
+#include <QVector>
+#include <vector>
 #include <QtSql>
 #include <QObject>
 
+
+#include "coursemodel.h"
 #include "database.h"
 
 class USERPAGEWIDGET_EXPORT UserPageWidget : public QWidget
@@ -27,11 +31,18 @@ public:
 
 public slots:
     void setUser(QStringList user);
+    void refreshCourses();
+    QStringList getInProgressCourseData();
+    QStringList getCreatedCourseData();
+    void openCourse(int id);
+
 
 signals:
     void openMainWindow();
     void openCreateCourseWidget();
     void logout();
+    void openCourse(CourseModel* model);
+
 
     void userChanged(QStringList user);
 
@@ -41,6 +52,11 @@ private:
     QVBoxLayout *m_mainLayout;
     QQmlContext *m_lkContext;
     QStringList m_user;
+
+    std::vector<CourseModel> m_createdCourses;
+    std::vector<CourseModel> m_inProgressCourses;
+
+
 };
 
 

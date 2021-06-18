@@ -12,27 +12,35 @@
 #include <QDir>
 #include <QObject>
 
+#include "coursemodel.h"
+#include "courseelement.h"
 #include "test.h"
-#include "database.h"
 
 
 
 class COURSEWIDGET_EXPORT CourseWidget : public QWidget
 {
     Q_OBJECT
+    Q_PROPERTY(int windowState READ windowState WRITE setWindowState NOTIFY windowStateChanged)
 
 
 public:
     CourseWidget(QWidget *pwdt = 0);
 
-public slots:
-    void addQuestin(const QString& question, const QStringList& answers, int rightAnswer);
-    void saveTest();
+    int windowState() const;
 
+public slots:
+   // void saveTest();
+    void setCourseModel(CourseModel*);
+    void openElement(int index);
+    void setWindowState(int windowState);
 
 signals:
 
     void openLK();
+
+
+    void windowStateChanged(int windowState);
 
 private:
 
@@ -40,10 +48,13 @@ private:
     QVBoxLayout *m_mainLayout;
     QQmlContext *m_courseContext;
 
-    std::vector<Test> m_tests;
-    Test temp_test;
-    User *m_loginedUser;
 
+    CourseModel *m_courseModel = nullptr;
+
+    //std::vector<CourseElement> m_courseElements;
+    //Test temp_test;
+
+    int m_windowState = 0;
 };
 
 #endif // COURSEWIDGET_H

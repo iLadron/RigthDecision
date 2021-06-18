@@ -5,7 +5,116 @@ CREATE TABLE Users (
 	login VARCHAR(45),
 	email VARCHAR(45),
 	password VARCHAR(45),
-	avatar LONGTEXT,
 
 	PRIMARY KEY (id)
 );
+
+
+CREATE TABLE Course(
+
+	id int(10) UNSIGNED AUTO_INCREMENT,
+	name VARCHAR(255),
+	shortDescription LONGTEXT,
+	description LONGTEXT,
+	rating float,	
+
+	idAuthor int(10) UNSIGNED,
+	
+	PRIMARY KEY (id),
+	FOREIGN KEY (idAuthor)	REFERENCES Users (id)
+);
+
+
+CREATE TABLE Test(
+
+	id int(10) UNSIGNED AUTO_INCREMENT,
+	name VARCHAR(255),
+	questions LONGTEXT,
+	answers LONGTEXT,
+	rightAnswerNumbers TEXT,
+	timeToComplite int(10),
+	
+	
+	idCourse int(10) UNSIGNED,
+	
+	PRIMARY KEY (id),
+	FOREIGN KEY (idCourse)	REFERENCES Course (id)
+);
+
+
+CREATE TABLE Theory(
+	
+	id int(10) UNSIGNED AUTO_INCREMENT,
+	text LONGTEXT,	
+	
+	idCourse int(10) UNSIGNED,
+	
+	PRIMARY KEY (id),
+	FOREIGN KEY (idCourse)	REFERENCES Course (id)
+);
+
+
+CREATE TABLE UserHasCourse(
+
+	idUser int(10) UNSIGNED,
+	idCourse int(10) UNSIGNED,
+	marks TEXT,
+	dateBegin date,
+	isCompleted int(10) UNSIGNED,
+	
+	FOREIGN KEY (idUser)	REFERENCES Users (id),
+	FOREIGN KEY (idCourse)	REFERENCES Course (id)
+);
+
+
+
+INSERT INTO Users(id, name, surname, login, email, password) 
+     VALUES
+             (NULL, 'Петр', 'Петров', '1', 'PetrPetrov@gmail.com', '1'),
+             (NULL, 'Игорь', 'Васильев', '2', 'MyEmail@gmail.com', '2'),
+             (NULL, 'Василий', 'Морозов', 'SuperUser', 'VasMor@gmail.com', 'HelloWorld'),
+             (NULL, 'Иван', 'Киров', 'BestNickname', 'iiiiiii@gmail.com', 'BestPassword'),
+             (NULL, 'Кирилл', 'Богомазов', 'qwerty', 'qweasdzxc@gmail.com', 'qwerasdf'),
+             (NULL, 'Евгения', 'Замышляева', 'Djenechka', 'Djenia@gmail.com', 'password');
+             
+                     
+                     
+INSERT INTO Course(id, name,shortDescription, description , rating, idAuthor)
+	VALUES
+		(NULL, 'Курс по математике','Для математиков','Этот курс поможет вам выучить основы математики', 4.1,1),
+		(NULL, 'Курс по физике','Для физиков' ,'Этот курс поможет вам выучить основы математики',NULL,1),
+		(NULL, 'Курс по программированию','Для программистов','Этот курс поможет вам выучить основы программирования',2.0,1),
+		(NULL, 'Курс по русскому языку','Для всех','Этот курс поможет вам выучить основы русского языка', 4.4,2);
+		
+INSERT INTO Test(id, name,questions,answers, rightAnswerNumbers,timeToComplite,idCourse)
+	VALUES
+		(NULL, 'Сложение', '2+2=;4+4=;2+0=;34+43=', '4;2;4;5;5;3;4;8;1;2;3;4;45;76;77;32','1;4;2;3',2,1),                    
+		(NULL, 'Вычитание', '1-1=;56-1=;4-4=;3-0=', '1;0;-1;11;52;53;54;55;0;4;2;3;3;4;0;1','2;4;1;1',4,1),
+		(NULL, 'Умножение', '2*2=;4*0=;1*1=;3*1=', '1;2;3;4;4;1;2;0;1;0;2;3;1;2;3;4','3;4;1;3',6,1),
+		(NULL, 'Деление', '2/2=;8/4=;16/2=;0/2=', '4;3;2;1;4;3;1;2;8;16;0;2;0;2;3;1','4;4;1;1',8,1);
+		
+INSERT INTO Theory(id,text,idCourse)
+	VALUES
+		(NULL,'Чтобы сложить два числа необходимо к одному прибавить второе. Например: 2+2 = 4',1),
+		(NULL,'Чтобы вычесть из одного числа второе, необходимо из первого отнять второе. Если оба числа совпадают, в ответе будет ноль. Если второе чилсо ноль, то ответом будет первое чилсо. Например: 6-2 = 4;4-4=0 ',1),
+		(NULL,'ЧЧтобы умножить два числа необходимо сложить к первому числу прибавить его же столько раз, чем равно второе число. Если один из множетелей является нулем, то ответ будет 0. Например: 2*2 = 4; 2*0=0',1),
+		(NULL,'Чтобы поделить одно число на второе, необходимо поделить первое на второе. Делить на ноль нельзя! Если первое число ноль, а второе не ноль, то в ответе будет 0. Например: 16/2 = 8; 0/4 = 0; 4/0 - НЕЛЬЗЯ!',1);
+                     
+
+INSERT INTO UserHasCourse(idUser,idCourse,marks,dateBegin, isCompleted)
+	VALUES
+		(2,1,'-1;-1;-1;-1',20210616,0),
+		(2,2,'4;5;4;4',20210614,1),
+		(2,3,'-1;-1;4;-1',20210616,0);
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     

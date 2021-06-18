@@ -88,6 +88,30 @@ void Database::logout()
     m_loginedUser = nullptr;
 }
 
+User Database::getUserById(int id)
+{
+    QSqlQuery query;
+    QString res;
+    QString strCommand = "SELECT * FROM Users WHERE id = '%1'";
+    res = strCommand.arg(id);
+    query.exec(res);
+
+    QSqlRecord rec = query.record();
+    query.next();
+
+    User resUser;
+
+    resUser.id = query.value(rec.indexOf("id")).toInt();
+    resUser.avatar = query.value(rec.indexOf("avatar")).toString();
+    resUser.email = query.value(rec.indexOf("email")).toString();
+    resUser.login = query.value(rec.indexOf("login")).toString();
+    resUser.name = query.value(rec.indexOf("name")).toString();
+    resUser.password = query.value(rec.indexOf("password")).toString();
+    resUser.surname = query.value(rec.indexOf("surname")).toString();
+
+    return resUser;
+}
+
 
 Database::Database()
 {
@@ -117,4 +141,34 @@ Database *Database::GetInstance()
 User *Database::getLoginedUser()
 {
     return m_loginedUser;
+}
+
+QSqlQuery Database::getInProgressCourses()
+{
+    QSqlQuery query;
+    QString res;
+    QString strCommand = "SELECT * FROM Course c join UserHasCourse uha on c.id = uha.idCourse WHERE uha.idUser = '%1'";
+    res = strCommand.arg(m_loginedUser->id);
+    query.exec(res);
+    return query;
+}
+
+QSqlQuery Database::getCreatedCourses()
+{
+    QSqlQuery query;
+    QString res;
+    QString strCommand = "SELECT * FROM Course WHERE idAuthor = '%1'";
+    res = strCommand.arg(m_loginedUser->id);
+    query.exec(res);
+    return query;
+}
+
+QSqlQuery Database::getTestsByCourseId(int id)
+{
+    QSqlQuery query;
+    QString res;
+    QString strCommand = "SELECT * FROM Test WHERE idCourse = '%1'";
+    res = strCommand.arg(id);
+    query.exec(res);
+    return query;
 }

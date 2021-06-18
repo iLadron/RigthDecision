@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //События
     connect(regWidget,SIGNAL(loginSuccess()), this, SLOT(afterLoginSuccsess()));
+    connect(userPageWidget, SIGNAL(openCourse(CourseModel*)),this,SLOT(openCourse()));
+    connect(userPageWidget, SIGNAL(openCourse(CourseModel*)),courseWidget,SLOT(setCourseModel(CourseModel*)));
+
 
     layout = new QHBoxLayout();
     layout->addWidget(regWidget);

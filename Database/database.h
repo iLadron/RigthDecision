@@ -17,6 +17,18 @@ struct User{
 
 };
 
+/*
+struct db_Test{
+    int id;
+    QString name;
+    QString questions;
+    QString answers;
+    QString rightAnswerNumbers;
+    int daysToComplete;
+};
+
+*/
+
 class DATABASE_EXPORT Database
 {
 public:
@@ -27,10 +39,19 @@ public:
     bool isEmailExist(User user);
     static void logout();
 
+    static User getUserById(int id);
+
 
     //Class functions
     static Database* GetInstance();
     static User* getLoginedUser();
+
+    //function for Course Model
+    static QSqlQuery getInProgressCourses();
+    static QSqlQuery getCreatedCourses();
+
+    static QSqlQuery getTestsByCourseId(int id);
+
 
 protected:
     Database();

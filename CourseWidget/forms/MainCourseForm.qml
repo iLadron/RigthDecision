@@ -4,7 +4,7 @@ Item {
 
     id:control
     //0 - CourseMaker; 1 - TestMaker;
-    property int windowState: 0
+    property int windowState: Form.windowState
 
     Loader  {
         id:loader
@@ -17,6 +17,12 @@ Item {
                         break;
                     case 1:
                         src = "qrc:/forms/forms/TestMaker.qml"
+                        break;
+                    case 2:
+                        src = "qrc:/forms/forms/Course.qml"
+                        break;
+                    case 3:
+                        src = "qrc:/forms/forms/Test.qml"
                         break;
                     default:
                     }

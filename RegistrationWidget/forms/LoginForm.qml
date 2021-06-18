@@ -17,14 +17,14 @@ Rectangle{
         password.text = ""
     }
 
-    color: "lightgray"
+    color: "#91d0dc"
 
     Item{
         focus: true
 
 
         Rectangle{
-            color: "transparent"
+            color: "#9bc5c5"
             anchors.fill: parent
             border.width: 2
             border.color: "red"
@@ -32,17 +32,21 @@ Rectangle{
 
         anchors.centerIn: parent
         width: 300
-        height: 300
+        height: 250
+        anchors.verticalCenterOffset: 0
+        anchors.horizontalCenterOffset: 0
 
         ColumnLayout{
             id: reg
 
             anchors.fill: parent
-            anchors.margins: 10
+            anchors.leftMargin: 10
+            anchors.rightMargin: 10
             spacing: 10
 
             TextField{
                 id:username
+                Layout.topMargin: 10
                 background: Rectangle{
                     implicitWidth: reg.width
                     implicitHeight:  reg.height/reg.children.length - 20
@@ -84,7 +88,7 @@ Rectangle{
                 id:button
                 width: parent.width
                 height: parent.height/reg.children.length - 20
-                color: "green"
+                color: buttonArea.containsMouse ? "yellow" : "green"
 
                 Label{
                     anchors.centerIn: parent
@@ -95,6 +99,7 @@ Rectangle{
                 MouseArea{
                     id:buttonArea
                     anchors.fill: parent
+                    hoverEnabled: true
                     onClicked: {
                         control.login();
                     }
@@ -105,7 +110,7 @@ Rectangle{
                 id:newAccount
                 width: parent.width
                 height: parent.height/reg.children.length - 20
-                color: "white"
+                color: "transparent"
                 Item{
                     anchors.centerIn:parent
                     width: lblLeftNew.width+lblRightNew.width
@@ -141,9 +146,13 @@ Rectangle{
 
             Rectangle{
                 id:forget
+                anchors.topMargin: -50
+                anchors.bottomMargin: 10
                 width: parent.width
                 height: parent.height/reg.children.length - 20
-                color: "white"
+                color: "transparent"
+                Layout.bottomMargin: 14
+                Layout.topMargin: -13
                 Item{
                     anchors.centerIn:parent
                     width: lblLeftForget.width+lblRightForget.width
@@ -208,3 +217,9 @@ Rectangle{
     }
 
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/
