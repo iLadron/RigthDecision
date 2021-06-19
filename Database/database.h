@@ -13,7 +13,6 @@ struct User{
     QString login;
     QString email;
     QString password;
-    QString avatar;
 
 };
 

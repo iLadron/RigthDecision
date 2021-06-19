@@ -11,14 +11,13 @@ QString Database::registerUser(User newUser)
     }
     QSqlQuery query;
     QString str;
-    QString strReg = "INSERT INTO Users(id, name, surname, login, email, password, avatar) "
-                     "VALUES(NULL, '%1', '%2', '%3', '%4', '%5', '%6') ";
+    QString strReg = "INSERT INTO Users(id, name, surname, login, email, password) "
+                     "VALUES(NULL, '%1', '%2', '%3', '%4', '%5') ";
     str = strReg.arg(newUser.name)
             .arg(newUser.surname)
             .arg(newUser.login)
             .arg(newUser.email)
-            .arg(newUser.password)
-            .arg(newUser.avatar);
+            .arg(newUser.password);
 
     if(!query.exec(str)){
         qDebug()<<"Error reg user";
@@ -50,7 +49,6 @@ QString Database::loginUser(User user)
     }
 
     m_loginedUser->id = query.value(rec.indexOf("id")).toInt();
-    m_loginedUser->avatar = query.value(rec.indexOf("avatar")).toString();
     m_loginedUser->email = query.value(rec.indexOf("email")).toString();
     m_loginedUser->login = query.value(rec.indexOf("login")).toString();
     m_loginedUser->name = query.value(rec.indexOf("name")).toString();
@@ -102,7 +100,6 @@ User Database::getUserById(int id)
     User resUser;
 
     resUser.id = query.value(rec.indexOf("id")).toInt();
-    resUser.avatar = query.value(rec.indexOf("avatar")).toString();
     resUser.email = query.value(rec.indexOf("email")).toString();
     resUser.login = query.value(rec.indexOf("login")).toString();
     resUser.name = query.value(rec.indexOf("name")).toString();
