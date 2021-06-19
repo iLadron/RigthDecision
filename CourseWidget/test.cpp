@@ -13,7 +13,7 @@ Test::Test(const Test &test)
     setDateEnd(test.dateEnd());
     setName(test.name());
     setResult(test.result());
-    setType(test.type());
+    setType(test.type());    
 }
 
 std::vector<Question> Test::questions() const
@@ -62,6 +62,7 @@ void Test::check(QList<int> arrayRes)
         setResult(QString::number(ceil(tempa)));
     endResetModel();
 }
+
 
 
 

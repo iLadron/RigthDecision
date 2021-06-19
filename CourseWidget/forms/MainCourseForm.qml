@@ -37,24 +37,7 @@ Item {
 
          }
 
-        onLoaded: {
-            switch(windowState){
-            case 0:
-                item.openTestCreator.connect(control.openTestCreator)
-                break;
-            case 1:
-                item.openCourseCreator.connect(control.openCourseCreator)
-                break;
-            default:
-            }
-        }
     }
 
 
-    function openCourseCreator(){
-        windowState = 0;
-    }
-    function openTestCreator(){
-        windowState = 1;
-    }
-}
+  }

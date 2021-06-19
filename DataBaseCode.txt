@@ -32,7 +32,7 @@ CREATE TABLE Test(
 	questions LONGTEXT,
 	answers LONGTEXT,
 	rightAnswerNumbers TEXT,
-	timeToComplite int(10),
+	timeToComplete int(10),
 	
 	
 	idCourse int(10) UNSIGNED,
@@ -87,7 +87,7 @@ INSERT INTO Course(id, name,shortDescription, description , rating, idAuthor)
 		(NULL, 'Курс по программированию','Для программистов','Этот курс поможет вам выучить основы программирования',2.0,1),
 		(NULL, 'Курс по русскому языку','Для всех','Этот курс поможет вам выучить основы русского языка', 4.4,2);
 		
-INSERT INTO Test(id, name,questions,answers, rightAnswerNumbers,timeToComplite,idCourse)
+INSERT INTO Test(id, name,questions,answers, rightAnswerNumbers,timeToComplete,idCourse)
 	VALUES
 		(NULL, 'Сложение', '2+2=;4+4=;2+0=;34+43=', '4;2;4;5;5;3;4;8;1;2;3;4;45;76;77;32','1;4;2;3',2,1),                    
 		(NULL, 'Вычитание', '1-1=;56-1=;4-4=;3-0=', '1;0;-1;11;52;53;54;55;0;4;2;3;3;4;0;1','2;4;1;1',4,1),

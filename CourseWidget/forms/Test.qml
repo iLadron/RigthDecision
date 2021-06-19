@@ -11,12 +11,100 @@ import QtQuick.Dialogs 1.3
 
 Rectangle{
     id:control
-    color: "#91d0dc"
-
+    color: "#91d0dc"    
 
     anchors.leftMargin: 10
+
+
+    Item{
+
+        id:buttonsTest
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        visible: CourseModel.isCreator
+        height:  CourseModel.isCreator ? 50 : 0
+
+
+
+        Rectangle{
+            id:btnСreateCourse;
+            width: 200
+            height: 30
+            color: maCourseCreator.containsMouse ? "#1bd31b" : "green"
+            Label{
+                anchors.centerIn: parent
+                text: qsTr("Назад к созданию курса")
+                color: "white"
+            }
+
+
+            MouseArea{
+                id:maCourseCreator
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    Form.setWindowState(0);
+                }
+            }
+        }
+
+
+
+        Rectangle{
+            id:btnСreateQuestion
+            anchors.left: btnСreateCourse.right
+            anchors.leftMargin: 10
+            width: 200
+            height: 30
+            color: maCourseCreator.containsMouse ? "#1bd31b" : "green"
+            Label{
+                anchors.centerIn: parent
+                text: qsTr("Добавить вопрос")
+                color: "white"
+            }
+
+
+            MouseArea{
+                id:maCreateQuestion
+                hoverEnabled: true
+                anchors.fill: parent
+                onClicked: {
+                    addQuestion.visible = true
+                }
+            }
+        }
+
+
+        Rectangle{
+            id:btnSaveTest;
+            width: 200
+            height: 30
+            anchors.left: btnСreateQuestion.right
+            anchors.leftMargin: 10
+            color: maSaveTest.containsMouse ? "#1bd31b" : "green"
+            Label{
+                anchors.centerIn: parent
+                text: qsTr("Сохранить тест")
+                color: "white"
+            }
+
+
+            MouseArea{
+                id:maSaveTest
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    Form.saveTest();
+                    Form.setWindowState(0);
+                }
+            }
+        }
+    }
+
     Label{
         id:lblHeader
+        anchors.top:buttonsTest.bottom
         width: 100
         height: 20
         MouseArea{
@@ -179,95 +267,4 @@ Rectangle{
     }
 
 
-/*
-    Column{
-        id:colCourseData
-      Label{
-          id: lblCourseName
-          width: 1000
-          height: 30
-          text: {
-
-              return "Название: " + nameee;
-          }
-
-          MouseArea{
-              anchors.fill: parent
-              onClicked: {
-                  console.log(CourseModel.name)
-              }
-          }
-      }
-
-      Label{
-          id: lblAuthor
-          width: 1000
-          height: 30
-          text: {
-
-              return "Автор: " + (CourseModel.authorName);
-          }
-      }
-
-      Label{
-          id: lblDescription
-          width: 1000
-          height: 30
-          text: {
-
-              return "Описание: " + (CourseModel.description);
-          }
-      }
-    }
-
-    TableView{
-        anchors.top: colCourseData.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        model: CourseModel
-
-       TableViewColumn{
-           role: "Type"
-           title: "Тип"
-           width: 100
-       }
-
-       TableViewColumn{
-           role: "Name"
-           title: "Название"
-           width: 100
-       }
-
-
-       TableViewColumn{
-           role: "Result"
-           title: "Результат"
-           width: 100
-       }
-
-
-       TableViewColumn{
-           role: "DataEnd"
-           title: "Дедлайн"
-           width: 100
-       }
-
-       itemDelegate: Rectangle{
-           implicitWidth: 100
-           implicitHeight: 20
-           border.color: "red"
-           border.width: 1
-           Label{
-               text: styleData.value
-           }
-           MouseArea{
-               anchors.fill: parent
-               onClicked: {
-                   console.log("click");
-               }
-           }
-       }
-    }
-
-*/
 }

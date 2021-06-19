@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(regWidget,SIGNAL(loginSuccess()), this, SLOT(openMainPage()));
     connect(mainPageWidget, SIGNAL(openLK()), this, SLOT(openLKPage()));
     connect(userPageWidget, SIGNAL(openMainWindow()), this, SLOT(openMainPage()));
-    connect(userPageWidget, SIGNAL(openCreateCourseWidget()), this, SLOT(openCourse()));
+    connect(userPageWidget, SIGNAL(openCreateCourseWidget()), this, SLOT(openCreateCourse()));
     connect(courseWidget, SIGNAL(openLK()), this, SLOT(openLKPage()));
     connect(userPageWidget, SIGNAL(logout()), this, SLOT(logout()));
 
@@ -82,6 +82,7 @@ void MainWindow::openLogin()
 
 void MainWindow::openCourse()
 {
+
     clearLayout(layout);
     courseWidget->setVisible(true);
     w->setLayout(layout);
@@ -90,7 +91,6 @@ void MainWindow::openCourse()
 
 void MainWindow::openMainPage()
 {
-    qDebug()<<"OpenMa2in";
     clearLayout(layout);
     mainPageWidget->setVisible(true);
     w->setLayout(layout);
@@ -103,20 +103,26 @@ void MainWindow::openLKPage()
     userPageWidget->setVisible(true);
     w->setLayout(layout);
     setCentralWidget(w);
-    userPageWidget->refreshCourses();
+   // userPageWidget->refreshCourses();
 
 }
 
+void MainWindow::openCreateCourse()
+{
+    clearLayout(layout);
+    courseWidget->setWindowState(0);
+    courseWidget->setVisible(true);
+    w->setLayout(layout);
+    setCentralWidget(w);
+}
+
 void MainWindow::clearLayout(QLayout *layout) {
-    qDebug()<<layout->count();
 
     for (int i = 0; i < layout->count(); ++i) {
         QWidget *w = layout->itemAt(i)->widget();
         if(w != NULL)
             w->setVisible(false);
     }
-    qDebug()<<layout->count();
-
 }
 
 void MainWindow::afterLoginSuccsess()

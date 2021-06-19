@@ -9,6 +9,8 @@ TheoryModel::TheoryModel(const TheoryModel &theory)
 {
     setName(theory.name());
     setType(theory.type());
+    setDateEnd(theory.dateEnd());
+    setResult(theory.result());
     setTheory(theory.theory());
 }
 

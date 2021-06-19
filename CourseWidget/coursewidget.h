@@ -31,7 +31,6 @@ public:
     int windowState() const;
 
 public slots:
-   // void saveTest();
     void setCourseModel(CourseModel*);
     void openElement(int index);
     void setWindowState(int windowState);
@@ -39,7 +38,6 @@ public slots:
 signals:
 
     void openLK();
-
 
     void windowStateChanged(int windowState);
 
@@ -51,9 +49,6 @@ private:
 
 
     CourseModel *m_courseModel = nullptr;
-
-    //std::vector<CourseElement> m_courseElements;
-    //Test temp_test;
 
     int m_windowState = 0;
 };

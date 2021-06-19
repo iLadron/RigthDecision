@@ -30,6 +30,7 @@ CourseModel::CourseModel(const CourseModel &model)
     m_description = model.m_description;
     m_rating = model.m_rating;
     m_courseId = model.m_courseId;
+    setIsCreator(model.isCreator());
 
 }
 
@@ -78,9 +79,10 @@ QVariant CourseModel::data(const QModelIndex &index, int role) const
             case ResultRole:
                 return element.result();
                 break;
-            case DateEndRole:
+            case DateEndRole:{
                 return element.dateEnd();
                 break;
+            }
             default:
                 return QVariant();
             }
@@ -207,6 +209,30 @@ void CourseModel::resetModel()
 {
     beginResetModel();
     endResetModel();
+}
+
+Test *CourseModel::getTempTest()
+{
+    return &m_tempTest;
+}
+
+
+
+void CourseModel::saveTest()
+{
+     m_tests.push_back(m_tempTest);
+     m_tempTest.clear();
+}
+
+void CourseModel::addQuestion(const QString &question, const QStringList &answers, int rightAnswer)
+{
+    qDebug()<<"asd";
+    m_tempTest.addQuestion(question, answers, rightAnswer);
+}
+
+bool CourseModel::getIsCreator() const
+{
+    return m_isCreator;
 }
 
 bool CourseModel::getIsComplete() const

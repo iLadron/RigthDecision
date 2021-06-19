@@ -64,6 +64,8 @@ public:
     int getTestsSize();
 
 
+    bool getIsCreator() const;
+
 public slots:
     QString getData();
 
@@ -76,6 +78,10 @@ public slots:
     void setAuthorName(QString authorName);
 
     void resetModel();
+
+    void saveTest();
+
+    void addQuestion(const QString &question, const QStringList &answers, int rightAnswer);
 
 signals:
     void nameChanged(QString name);

@@ -54,10 +54,6 @@ public slots:
 private:
     std::vector<Question> m_questions;
 
-
-public:
-
-signals:
 };
 
 

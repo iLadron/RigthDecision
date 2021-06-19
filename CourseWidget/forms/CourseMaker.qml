@@ -6,13 +6,12 @@ import QtQuick.Dialogs 1.3
 Rectangle{
     id:control
 
-    signal openTestCreator()
     color: "#91d0dc"
 
 
     Rectangle{
         id:btnOpenLK
-        width: 100
+        width: 200
         height: 30
         color: maOpenLK.containsMouse ? "#1bd31b" : "green"
         Label{
@@ -36,11 +35,11 @@ Rectangle{
 
     Rectangle{
         id:btnСreateTest
-        width: 100
+        width: 200
         height: 30
         anchors.left:btnOpenLK.right
         anchors.leftMargin: 10
-        color: maCourseCreator.containsMouse ? "#1bd31b" : "green"
+        color: maСreateTest.containsMouse ? "#1bd31b" : "green"
         Label{
             anchors.centerIn: parent
             text: qsTr("Создать тест")
@@ -49,19 +48,44 @@ Rectangle{
 
 
         MouseArea{
-            id:maCourseCreator
+            id:maСreateTest
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
                 console.log("openTest")
-                openTestCreator();
+                Form.setWindowState(1)
+            }
+        }
+    }
+
+    Rectangle{
+        id:btnСreateTheory
+        width: 200
+        height: 30
+        anchors.left:btnСreateTest.right
+        anchors.leftMargin: 10
+        color: maСreateTheory.containsMouse ? "#1bd31b" : "green"
+        Label{
+            anchors.centerIn: parent
+            text: qsTr("Создать теорию")
+            color: "white"
+        }
+
+
+        MouseArea{
+            id:maСreateTheory
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: {
+                console.log("Создать теорию")
             }
         }
     }
 
 
+
     Label{
-        width: 100
+        width: 200
         height: 30
         anchors.centerIn: parent
         text: "заготовочка для меню создания курса"

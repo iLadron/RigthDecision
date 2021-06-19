@@ -8,6 +8,7 @@
 #include <QQuickItem>
 #include <QQmlContext>
 #include <QVBoxLayout>
+#include <QDate>
 
 #include <QVector>
 #include <vector>
@@ -35,6 +36,7 @@ public slots:
     QStringList getInProgressCourseData();
     QStringList getCreatedCourseData();
     void openCourse(int id);
+    void changeCourse(int id);
 
 
 signals:

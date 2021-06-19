@@ -23,7 +23,7 @@ public:
 
 public slots:
     QString registerUser(const QString name,const QString surname,const QString login,
-                         const QString email,const QString password,const QString avatar);
+                         const QString email,const QString password);
     QString loginUser(const QString login, const QString password);
 
 

@@ -6,7 +6,6 @@ import QtQuick.Dialogs 1.3
 Rectangle{
     id:control
 
-    signal openCourseCreator()    
     color: "#91d0dc"
 
 
@@ -27,7 +26,7 @@ Rectangle{
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                openCourseCreator();
+                Form.setWindowState(0);
             }
         }
     }
@@ -79,7 +78,7 @@ Rectangle{
             hoverEnabled: true
             onClicked: {
                 Form.saveTest();
-                openCourseCreator();
+                Form.setWindowState(0);
             }
         }
     }

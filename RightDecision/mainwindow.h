@@ -32,6 +32,7 @@ public slots:
     void openCourse();
     void openMainPage();
     void openLKPage();
+    void openCreateCourse();
 
 
 

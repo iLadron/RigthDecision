@@ -57,6 +57,8 @@ void UserPageWidget::refreshCourses()
         QSqlRecord tempCourseInfoRec = tempCourseInfo.record();
         tempCourseInfo.next();
 
+        tempModel.setDateBegin(tempCourseInfo.value(tempCourseInfoRec.indexOf("dateBegin")).toString());
+
         QStringList tempMarks = tempCourseInfo.value(tempCourseInfoRec.indexOf("marks")).toString().split(';');
         int counterMarks = 0;
 
@@ -75,6 +77,22 @@ void UserPageWidget::refreshCourses()
                 }
                 tempTest.addQuestion(questions[i],answersSeperated,rightAnswersNumbers[i].toInt());
             }
+
+
+
+            QStringList dateBeginData = tempModel.getDateBegin().split('-');
+
+            QDate dateBegin;
+            dateBegin.setDate(dateBeginData[0].toInt(), dateBeginData[1].toInt(),dateBeginData[2].toInt());
+            dateBegin = dateBegin.addDays(tempTestProgress.value(tempRec.indexOf("timeToComplete")).toInt());
+
+            tempTest.setDateEnd(dateBegin.toString("dd-MM-yyyy"));
+
+
+
+
+
+
             tempModel.addElement(tempTest);
         }
 
@@ -85,6 +103,7 @@ void UserPageWidget::refreshCourses()
 
             TheoryModel tempTheory;
             tempTheory.setType("Теория");
+            tempTheory.setDateEnd("Нет");
             tempTheory.setName(theoryQuery.value(theoryRec.indexOf("name")).toString());
             tempTheory.setTheory(theoryQuery.value(theoryRec.indexOf("text")).toString());
 
@@ -113,18 +132,24 @@ void UserPageWidget::refreshCourses()
     while (CreatedQuery.next()) {
 
         CourseModel tempModel;
+        tempModel.setDateBegin(CreatedQuery.value(rec.indexOf("")).toString());
         User tempAuthor = Database::getUserById(CreatedQuery.value(rec.indexOf("idAuthor")).toInt());
 
-        QSqlQuery tempTestProgress = Database::getTestsByCourseId(CreatedQuery.value(rec.indexOf("id")).toInt());
 
+        QSqlQuery tempTestProgress = Database::getTestsByCourseId(CreatedQuery.value(rec.indexOf("id")).toInt());
         QSqlRecord tempRec = tempTestProgress.record();
 
+
+        QSqlQuery tempCourseInfo = Database::getCourseInfoByCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
+        QSqlRecord tempCourseInfoRec = tempCourseInfo.record();
 
         while (tempTestProgress.next()) {
             Test tempTest;
             QStringList questions = tempTestProgress.value(tempRec.indexOf("questions")).toString().split(';');
             QStringList answers = tempTestProgress.value(tempRec.indexOf("answers")).toString().split(';');
             QStringList rightAnswersNumbers = tempTestProgress.value(tempRec.indexOf("rightAnswerNumbers")).toString().split(';');
+            tempTest.setName(tempTestProgress.value(tempRec.indexOf("name")).toString());
+            tempTest.setType("Тест");
             for (int i = 0; i < questions.size();i++){
                 QStringList answersSeperated;
                 for(int j = 0+(i*4); j < 4+(i*4);j++){
@@ -132,9 +157,23 @@ void UserPageWidget::refreshCourses()
                 }
                 tempTest.addQuestion(questions[i],answersSeperated,rightAnswersNumbers[i].toInt());
             }
+
             tempModel.addElement(tempTest);
         }
 
+        QSqlQuery theoryQuery = Database::getTheoryByCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
+        QSqlRecord theoryRec = theoryQuery.record();
+        while(theoryQuery.next()){
+
+            TheoryModel tempTheory;
+            tempTheory.setType("Теория");
+            tempTheory.setDateEnd("Нет");
+            tempTheory.setName(theoryQuery.value(theoryRec.indexOf("name")).toString());
+            tempTheory.setTheory(theoryQuery.value(theoryRec.indexOf("text")).toString());
+
+            tempModel.addElement(tempTheory);
+
+        }
 
         tempModel.setData(CreatedQuery.value(rec.indexOf("name")).toString(),
                           tempAuthor,
@@ -158,7 +197,22 @@ QStringList UserPageWidget::getCreatedCourseData()
 
 void UserPageWidget::openCourse(int id)
 {
-    emit openCourse(& m_inProgressCourses[id]);
+    if(id == -1){
+        CourseModel* model = new CourseModel();
+        model->setIsCreator(true);
+        model->setData("Введите название курса", *Database::getLoginedUser(),"Введите описание", -1);
+        emit openCourse(model);
+    }else{
+        m_inProgressCourses[id].setIsCreator(false);
+        emit openCourse(& m_inProgressCourses[id]);
+
+    }
+}
+
+void UserPageWidget::changeCourse(int id)
+{
+    m_createdCourses[id].setIsCreator(true);
+    emit openCourse(& m_createdCourses[id]);
 }
 
 QStringList UserPageWidget::getInProgressCourseData()
