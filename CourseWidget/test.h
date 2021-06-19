@@ -37,6 +37,7 @@ public:
 
     std::vector<Question> questions() const;
     void clear();
+    void setQuestions(std::vector<Question>);
 
 
 

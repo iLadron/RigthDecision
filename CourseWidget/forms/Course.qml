@@ -121,6 +121,7 @@ Rectangle{
               TextField{
                   id:lblCourseName1
                   anchors.fill:parent
+                  selectByMouse: true
                   text: CourseModel.name
               }
           }
@@ -153,6 +154,7 @@ Rectangle{
 
               TextField{
                   id:lblDescription1
+                  selectByMouse: true
                   anchors.fill:parent
                   text: CourseModel.description
               }
@@ -228,6 +230,30 @@ Rectangle{
                }
            }
        }
+
+       /*
+       TableViewColumn{
+           visible: !CourseModel.isCreator
+           title: "Удаление"
+           width: 100
+
+           delegate: Text{
+               anchors.fill: parent
+               text: "Удалить"
+               MouseArea{
+                   anchors.fill: parent
+                   onClicked: {
+                       console.log("cloickafas")
+
+                       CourseModel.deleteElement(styleData.row);
+
+                       console.log("cl2222as")
+
+                   }
+               }
+           }
+       }
+       */
 
 
        itemDelegate: Rectangle{

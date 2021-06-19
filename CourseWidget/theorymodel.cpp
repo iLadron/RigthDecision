@@ -14,6 +14,11 @@ TheoryModel::TheoryModel(const TheoryModel &theory)
     setTheory(theory.theory());
 }
 
+TheoryModel &TheoryModel::operator=(const TheoryModel &theory)
+{
+    return *this;
+}
+
 QString TheoryModel::theory() const
 {
     return m_theory;

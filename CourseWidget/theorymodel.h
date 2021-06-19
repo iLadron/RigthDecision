@@ -16,6 +16,7 @@ class TheoryModel : public QObject, public CourseElement
 public:
     TheoryModel();
     TheoryModel(const TheoryModel& theory);
+    TheoryModel &operator=(const TheoryModel& theory);
 
 
     void setTheory(const QString &theory);

@@ -53,10 +53,10 @@ void CourseWidget::openElement(int index)
 
         setWindowState(4);
     }else{
-        Test* testElement = m_courseModel->getTestByIndex(index-m_courseModel->getTheorySize());
+        //Test* testElement = m_courseModel->getTestByIndex(index-m_courseModel->getTheorySize());
 
-        m_courseContext->setContextProperty("TestModel", testElement);
-        m_courseContext->setContextProperty("TestName", testElement->name());
+        m_courseContext->setContextProperty("TestModel", m_courseModel->getTestByIndex(index-m_courseModel->getTheorySize()));
+        m_courseContext->setContextProperty("TestName", m_courseModel->getTestByIndex(index-m_courseModel->getTheorySize())->name());
 
         setWindowState(3);
     }
@@ -75,6 +75,7 @@ void CourseWidget::setWindowState(int windowState)
 
 void CourseWidget::setTestModel()
 {
+    m_courseModel->getTempTest()->clear();
     m_courseModel->getTempTest()->setName("Введите название теста");
     m_courseModel->getTempTest()->setType("Тест");
     m_courseContext->setContextProperty("TestModel", m_courseModel->getTempTest());
@@ -83,6 +84,7 @@ void CourseWidget::setTestModel()
 
 void CourseWidget::setTheoryModel()
 {
+
     m_courseModel->getTheoryModel()->setName("Введите название теории");
     m_courseModel->getTheoryModel()->setType("Теория");
     m_courseContext->setContextProperty("TheoryName", m_courseModel->getTheoryModel()->name());

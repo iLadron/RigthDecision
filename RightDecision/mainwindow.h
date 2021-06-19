@@ -66,7 +66,7 @@ private:
     User *m_user;
 
     QNetworkAccessManager *manager;
-     QNetworkRequest request;
+    QNetworkRequest request;
 
 private:
     void clearLayout(QLayout *layout);

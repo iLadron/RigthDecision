@@ -95,7 +95,7 @@ Rectangle{
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    CourseModel.saveTest(lblDescription1.text, lblDateText.text);
+                    CourseModel.saveTest(lblDescription1.text, lblDateText.text,TestName);
                     Form.setWindowState(2);
                 }
             }
@@ -127,6 +127,7 @@ Rectangle{
 
                 TextField{
                     id:lblDescription1
+                    selectByMouse: true
                     text: TestName
                 }
             }
@@ -144,6 +145,7 @@ Rectangle{
             }
             TextField{
                 id:lblDateText
+                selectByMouse: true
                 anchors.left: lblDate.right
             }
         }
@@ -449,7 +451,7 @@ Rectangle{
                             //TODO: Add Question Logic
 
 
-                            CourseModel.addQuestion(question.text, [ans1Temp.text, ans2Temp.text, ans3Temp.text,ans4Temp.text],2)
+                            CourseModel.addQuestion(question.text, [ans1Temp.text, ans2Temp.text, ans3Temp.text,ans4Temp.text],2,TestName)
                             addQuestion.visible = false
                         }
                     }

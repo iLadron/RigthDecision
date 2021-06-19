@@ -28,6 +28,13 @@ void Test::clear()
     setDateEnd("");
 }
 
+void Test::setQuestions(std::vector<Question> questions)
+{
+    beginResetModel();
+    m_questions = questions;
+    endResetModel();
+}
+
 void Test::addQuestion(const QString& question, const QStringList& answers, int rightAnswer)
 {
     beginResetModel();

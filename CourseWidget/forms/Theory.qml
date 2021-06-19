@@ -64,7 +64,7 @@ Rectangle{
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    //CourseModel.saveTest(lblDescription1.text, lblDateText.text);
+                    CourseModel.saveTheory(lblCourseName1.text, lblTheText.text,TheoryName); //Поменть
                     Form.setWindowState(2);
                 }
             }
@@ -100,6 +100,7 @@ Rectangle{
         TextField{
             id:lblCourseName1
             anchors.top:lblThe.top
+            selectByMouse: true
             text: TheoryName
         }
     }
@@ -127,6 +128,7 @@ Rectangle{
         TextField{
             id:lblTheText
             wrapMode: Text.WordWrap
+            selectByMouse: true
             text: TheoryText
         }
     }

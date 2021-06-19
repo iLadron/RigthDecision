@@ -224,25 +224,56 @@ TheoryModel *CourseModel::getTheoryModel()
 
 
 
-void CourseModel::saveTest(QString name, QString date)
+void CourseModel::saveTest(QString name, QString date, QString oldName)
 {
+    beginResetModel();
     m_tempTest.setName(name);
     m_tempTest.setDateEnd(date);
+
+    for(int i = 0; i < m_tests.size();i++){
+        if(m_tests[i].name()==oldName){
+            m_tests[i].setDateEnd(date);
+            m_tests[i].setName(name);
+            //m_tests[i].setQuestions(m_tempTest.questions());
+            m_tempTest.clear();
+            return;
+
+        }
+    }
+
      m_tests.push_back(m_tempTest);
      m_tempTest.clear();
+     endResetModel();
 }
 
-void CourseModel::saveTheort(QString name, QString theory)
+void CourseModel::saveTheory(QString name, QString theory, QString oldName)
 {
     m_tempTheory.setName(name);
     m_tempTheory.setTheory(theory);
+    std::vector<TheoryModel> tempVec;
+    for(int i = 0; i < m_theories.size();i++){
+        if(m_theories[i].name()==oldName){
+            m_theories[i].setTheory(theory);
+            m_theories[i].setName(name);
+            m_tempTheory.setName("");
+            m_tempTheory.setTheory("");
+            return;
+        }
+    }
+
     m_theories.push_back(m_tempTheory);
     m_tempTheory.setName("");
     m_tempTheory.setTheory("");
 }
 
-void CourseModel::addQuestion(const QString &question, const QStringList &answers, int rightAnswer)
+void CourseModel::addQuestion(const QString &question, const QStringList &answers, int rightAnswer, QString oldName)
 {
+    for(int i = 0; i < m_tests.size();i++){
+        if(m_tests[i].name()==oldName){
+            m_tests[i].addQuestion(question,answers,rightAnswer);
+            return;
+        }
+    }
     m_tempTest.addQuestion(question, answers, rightAnswer);
 }
 
