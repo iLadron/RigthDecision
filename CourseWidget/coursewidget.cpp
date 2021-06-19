@@ -73,6 +73,22 @@ void CourseWidget::setWindowState(int windowState)
     emit windowStateChanged(m_windowState);
 }
 
+void CourseWidget::setTestModel()
+{
+    m_courseModel->getTempTest()->setName("Введите название теста");
+    m_courseModel->getTempTest()->setType("Тест");
+    m_courseContext->setContextProperty("TestModel", m_courseModel->getTempTest());
+    m_courseContext->setContextProperty("TestName", m_courseModel->getTempTest()->name());
+}
+
+void CourseWidget::setTheoryModel()
+{
+    m_courseModel->getTheoryModel()->setName("Введите название теории");
+    m_courseModel->getTheoryModel()->setType("Теория");
+    m_courseContext->setContextProperty("TheoryName", m_courseModel->getTheoryModel()->name());
+    m_courseContext->setContextProperty("TheoryText", m_courseModel->getTheoryModel()->theory());
+}
+
 
 //void CourseWidget::addQuestin(const QString &question, const QStringList &answers, int rightAnswer)
 //{

@@ -44,7 +44,7 @@ Rectangle{
                 hoverEnabled: true
                 onClicked: {
                     console.log("openTest")
-
+                    Form.setTestModel()
                     Form.setWindowState(3)
                 }
             }
@@ -69,7 +69,8 @@ Rectangle{
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    console.log("Создать теорию")
+                    Form.setTheoryModel()
+                    Form.setWindowState(4)
                 }
             }
         }

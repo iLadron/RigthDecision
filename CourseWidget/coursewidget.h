@@ -32,6 +32,8 @@ public:
 
 public slots:
     void setCourseModel(CourseModel*);
+    void setTestModel();
+    void setTheoryModel();
     void openElement(int index);
     void setWindowState(int windowState);
 

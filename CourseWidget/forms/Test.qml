@@ -44,7 +44,7 @@ Rectangle{
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    Form.setWindowState(0);
+                    Form.setWindowState(2);
                 }
             }
         }
@@ -57,7 +57,7 @@ Rectangle{
             anchors.leftMargin: 10
             width: 200
             height: 30
-            color: maCourseCreator.containsMouse ? "#1bd31b" : "green"
+            color: maCreateQuestion.containsMouse ? "#1bd31b" : "green"
             Label{
                 anchors.centerIn: parent
                 text: qsTr("Добавить вопрос")
@@ -95,27 +95,61 @@ Rectangle{
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    Form.saveTest();
-                    Form.setWindowState(0);
+                    CourseModel.saveTest(lblDescription1.text, lblDateText.text);
+                    Form.setWindowState(2);
                 }
             }
         }
     }
 
-    Label{
-        id:lblHeader
+
+    Column{
+        id:colHeader
         anchors.top:buttonsTest.bottom
-        width: 100
-        height: 20
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                console.log(windowState)
+
+        height: CourseModel.isCreator ? 70 : 30
+
+        Label{
+            id:lblHeader
+            width: contentWidth
+            height: CourseModel.isCreator ? 30 : 0
+
+            text: "Название теста: "
+
+            StackLayout{
+                anchors.left: lblHeader.right
+                width: 300
+                height: 30
+                currentIndex: CourseModel.isCreator ? 1 : 0
+                Label{
+                    text: TestName
+                }
+
+                TextField{
+                    id:lblDescription1
+                    text: TestName
+                }
             }
         }
 
-        text:"Название теста: " + TestName;
+        Item{
+            anchors.top: lblHeader.bottom
+            visible: CourseModel.isCreator
+            height: CourseModel.isCreator ? 30 : 0
+            Label{
+                id:lblDate
+               height: 30
+               width: contentWidth
+               text:"Введите дату в формате дд-мм-гггг"
+            }
+            TextField{
+                id:lblDateText
+                anchors.left: lblDate.right
+            }
+        }
     }
+
+
 
 
     ListView{
@@ -123,7 +157,7 @@ Rectangle{
         clip: true
 
         anchors.left: parent.left
-        anchors.top: lblHeader.bottom
+        anchors.top: colHeader.bottom
         anchors.bottom: rowButtons.top;
         anchors.right: parent.right
         anchors.leftMargin: 10
@@ -200,7 +234,8 @@ Rectangle{
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: 30
+        visible: !CourseModel.isCreator
+        height: CourseModel.isCreator ? 0 : 30
         spacing: 10
         anchors.leftMargin: 10
 
@@ -266,5 +301,161 @@ Rectangle{
         }
     }
 
+
+    Item{
+        id:addQuestion
+        anchors.centerIn: parent
+
+        Rectangle{
+            anchors.fill: parent
+            color: control.color
+            border.width: 2
+            border.color: "red"
+
+        }
+
+        visible: false
+
+        width: parent.width/2
+        height: parent.height/2
+
+
+        TextField{
+            id:question
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 10
+            background: Rectangle{
+                implicitWidth: addQuestion.width - 10
+                implicitHeight:  20
+                color: "white"
+            }
+
+            selectByMouse: true
+            placeholderText: qsTr("Вопрос")
+        }
+
+        ColumnLayout {
+            anchors.top: question.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 10
+            GridLayout{
+                id:gridAns
+
+                rows: 4
+                columns: 2
+                RadioButton {
+                    id:rb1Temp
+                    checked: true
+                }
+                TextField{
+                    id:ans1Temp
+                    background: Rectangle{
+                        implicitWidth: question.width - rb1Temp.width - gridAns.rowSpacing
+                        implicitHeight:  20
+                        color: "white"
+                    }
+
+                    selectByMouse: true
+                    placeholderText: qsTr("Ответ 1")
+                }
+
+                RadioButton {
+                }
+                TextField{
+                    id:ans2Temp
+                    background: Rectangle{
+                        implicitWidth: question.width - rb1Temp.width - gridAns.rowSpacing
+                        implicitHeight:  20
+                        color: "white"
+                    }
+
+                    selectByMouse: true
+                    placeholderText: qsTr("Ответ 2")
+                }
+
+
+                RadioButton {
+                }
+                TextField{
+                    id:ans3Temp
+                    background: Rectangle{
+                        implicitWidth: question.width - rb1Temp.width - gridAns.rowSpacing
+                        implicitHeight:  20
+                        color: "white"
+                    }
+
+                    selectByMouse: true
+                    placeholderText: qsTr("Ответ 3")
+                }
+
+                RadioButton {
+                }
+                TextField{
+                    id:ans4Temp
+                    background: Rectangle{
+                        implicitWidth: question.width - rb1Temp.width - gridAns.rowSpacing
+                        implicitHeight:  20
+                        color: "white"
+                    }
+
+                    selectByMouse: true
+                    placeholderText: qsTr("Ответ 4")
+                }
+            }
+
+            RowLayout{
+                Rectangle{
+                    id:btnСancel
+                    width: 200
+                    height: 30
+                    color: maCancel.containsMouse ? "#1bd31b" : "green"
+                    Label{
+                        anchors.centerIn: parent
+                        text: qsTr("Отмена")
+                        color: "white"
+                    }
+
+
+                    MouseArea{
+                        id:maCancel
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        onClicked: {
+                            addQuestion.visible = false
+                        }
+                    }
+                }
+
+                Rectangle{
+                    id:btnAddQuestion;
+                    width: 200
+                    height: 30
+                    color: maAddQuestion.containsMouse ? "#1bd31b" : "green"
+                    Label{
+                        anchors.centerIn: parent
+                        text: qsTr("Добавить вопрос")
+                        color: "white"
+                    }
+
+
+                    MouseArea{
+                        anchors.fill: parent
+                        id:maAddQuestion
+                        hoverEnabled: true
+                        onClicked: {
+                            //TODO: Add Question Logic
+
+
+                            CourseModel.addQuestion(question.text, [ans1Temp.text, ans2Temp.text, ans3Temp.text,ans4Temp.text],2)
+                            addQuestion.visible = false
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }

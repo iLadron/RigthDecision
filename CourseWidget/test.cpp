@@ -24,6 +24,8 @@ std::vector<Question> Test::questions() const
 void Test::clear()
 {
     m_questions.clear();
+    setName("");
+    setDateEnd("");
 }
 
 void Test::addQuestion(const QString& question, const QStringList& answers, int rightAnswer)

@@ -12,13 +12,70 @@ import QtQuick.Dialogs 1.3
 Rectangle{
     id:control
     color: "#91d0dc"
-
-
     anchors.leftMargin: 10
+
+    Item{
+
+        id:buttonsTheory
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        visible: CourseModel.isCreator
+        height:  CourseModel.isCreator ? 50 : 0
+
+        Rectangle{
+            id:btnСreateCourse;
+            width: 200
+            height: 30
+            color: maCourseCreator.containsMouse ? "#1bd31b" : "green"
+            Label{
+                anchors.centerIn: parent
+                text: qsTr("Назад к созданию курса")
+                color: "white"
+            }
+
+
+            MouseArea{
+                id:maCourseCreator
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    Form.setWindowState(2);
+                }
+            }
+        }
+
+        Rectangle{
+            id:btnSaveTest;
+            width: 200
+            height: 30
+            anchors.left: btnСreateCourse.right
+            anchors.leftMargin: 10
+            color: maSaveTest.containsMouse ? "#1bd31b" : "green"
+            Label{
+                anchors.centerIn: parent
+                text: qsTr("Сохранить теорию")
+                color: "white"
+            }
+
+
+            MouseArea{
+                id:maSaveTest
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    //CourseModel.saveTest(lblDescription1.text, lblDateText.text);
+                    Form.setWindowState(2);
+                }
+            }
+        }
+    }
+
     Label{
         id:lblHeader
-        width: 100
+        width: contentWidth
         height: 20
+        anchors.top: buttonsTheory.bottom
         MouseArea{
             anchors.fill: parent
             onClicked: {
@@ -26,8 +83,27 @@ Rectangle{
             }
         }
 
-        text:"Название теста: " + TheoryName;
+        text:"Название теоретического блока: ";
     }
+
+    StackLayout{
+        anchors.top: lblHeader.top
+        anchors.left: lblHeader.right
+        width: 300
+        height: 30
+        currentIndex: CourseModel.isCreator ? 1 : 0
+        Label{
+            id:lblThe
+            text: TheoryName
+        }
+
+        TextField{
+            id:lblCourseName1
+            anchors.top:lblThe.top
+            text: TheoryName
+        }
+    }
+
 
     Label{
         id:lblTheory
@@ -35,15 +111,24 @@ Rectangle{
         anchors.topMargin: 10
         width: 400
         height: 20
-        wrapMode: Text.WordWrap
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                console.log(windowState)
-            }
+        text:"Теория\n "
+    }
+
+    StackLayout{
+        anchors.top: lblTheory.bottom
+        width: 300
+        height: 30
+        currentIndex: CourseModel.isCreator ? 1 : 0
+        Label{
+            wrapMode: Text.WordWrap
+            text: TheoryText
         }
 
-        text:"Теория\n " + TheoryText;
+        TextField{
+            id:lblTheText
+            wrapMode: Text.WordWrap
+            text: TheoryText
+        }
     }
 
 
@@ -52,7 +137,8 @@ Rectangle{
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: 30
+        visible: !CourseModel.isCreator
+        height: CourseModel.isCreator ? 0 : 30
         spacing: 10
         anchors.leftMargin: 10
 

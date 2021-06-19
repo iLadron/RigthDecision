@@ -79,7 +79,11 @@ public slots:
 
     void resetModel();
 
-    void saveTest();
+    Test* getTempTest();
+    TheoryModel* getTheoryModel();
+
+    void saveTest(QString name, QString date);
+    void saveTheort(QString name, QString theory);
 
     void addQuestion(const QString &question, const QStringList &answers, int rightAnswer);
 
@@ -106,6 +110,7 @@ private:
 
 
     Test m_tempTest;
+    TheoryModel m_tempTheory;
 
     bool m_isCreator;
     QString m_authorName;

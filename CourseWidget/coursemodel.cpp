@@ -211,22 +211,38 @@ void CourseModel::resetModel()
     endResetModel();
 }
 
+
 Test *CourseModel::getTempTest()
 {
     return &m_tempTest;
 }
 
-
-
-void CourseModel::saveTest()
+TheoryModel *CourseModel::getTheoryModel()
 {
+    return &m_tempTheory;
+}
+
+
+
+void CourseModel::saveTest(QString name, QString date)
+{
+    m_tempTest.setName(name);
+    m_tempTest.setDateEnd(date);
      m_tests.push_back(m_tempTest);
      m_tempTest.clear();
 }
 
+void CourseModel::saveTheort(QString name, QString theory)
+{
+    m_tempTheory.setName(name);
+    m_tempTheory.setTheory(theory);
+    m_theories.push_back(m_tempTheory);
+    m_tempTheory.setName("");
+    m_tempTheory.setTheory("");
+}
+
 void CourseModel::addQuestion(const QString &question, const QStringList &answers, int rightAnswer)
 {
-    qDebug()<<"asd";
     m_tempTest.addQuestion(question, answers, rightAnswer);
 }
 
