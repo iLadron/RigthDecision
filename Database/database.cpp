@@ -201,6 +201,45 @@ void Database::saveTheoryResults(int idCoure, QString answer)
     query.exec(str);
 }
 
+void Database::saveCourse(int idCourse,QStringList tests, QStringList theories)
+{
+    QSqlQuery query;
+    QString str;
+    QString strReg = "delete from Test WHERE idCourse = '%1'; delete from Theory WHERE idCourse = '%1'";
+
+    str = strReg.arg(idCourse);
+    query.exec(str);
+
+
+
+    QString testValues="";
+    QString theoryValues="";
+
+    for(int i = 0; i < tests.size();i++){
+        testValues+=tests[i] + ',';
+    }
+
+    testValues[testValues.size()-1] = ';';
+
+    for(int i = 0; i < theories.size();i++){
+        theoryValues+=theories[i] + ",";
+    }
+    theoryValues[theoryValues.size()-1] = ';';
+
+    QSqlQuery query2;
+    QString strReg2 = "INSERT INTO Test(id, name,questions,answers, rightAnswerNumbers,timeToComplete,idCourse) VALUES " + testValues;
+
+    query2.exec(strReg2);
+
+
+    QSqlQuery query3;
+    QString strReg3 = "INSERT INTO Theory(id,name,text, Result,idCourse) VALUES " + theoryValues;
+
+    query3.exec(strReg3);
+
+
+}
+
 QSqlQuery Database::getCourseInfoByCourseId(int id)
 {
     QSqlQuery query;

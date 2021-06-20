@@ -54,6 +54,7 @@ public:
 
     static void saveTestResults(int idCoure, QString answer);
     static void saveTheoryResults(int idCoure, QString answer);
+    static void saveCourse(int idCourse,QStringList tests, QStringList theories);
 
 
 

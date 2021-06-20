@@ -298,6 +298,51 @@ void CourseModel::saveTheoryResults()
     Database::saveTheoryResults(m_courseId,marks);
 }
 
+void CourseModel::saveCourse(QString courseName, QString courseDescription)
+{
+    QStringList testCreator;
+    QStringList theoryCreator;
+    QString courseCreator = "()";
+
+
+    for(int i = 0; i < m_tests.size(); i++){
+        QString questions ="";
+        QString answers ="";
+        QString rightAnswers="";
+
+        for(int j =0; j < m_tests[i].questions().size(); j++){
+            questions+=m_tests[i].questions()[i].m_question + ";";
+            answers+=QString::number(m_tests[i].questions()[i].m_rightAnswer) + ";";
+            for(int k = 0+(j*4); k < 4+(j*4);k++){
+                answers+=m_tests[i].questions()[i].m_answers[k] + ";";
+            }
+        }
+
+        QString value="(NULL, '%1', '%2', '%3','%4',%5,%6)";
+        value = value.arg(m_tests[i].name())
+                .arg(questions)
+                .arg(answers)
+                .arg(rightAnswers)
+                .arg(m_tests[i].dateEnd().toInt())
+                .arg(m_courseId);
+
+        testCreator.push_back(value);
+    }
+
+    for(int i = 0; i <m_theories.size();i++){
+        QString value = "(NULL,'%1','%2','',%3)";
+
+        value = value.arg(m_theories[i].name())
+                .arg(m_theories[i].theory())
+                .arg(m_courseId);
+        theoryCreator.push_back(value);
+    }
+
+
+
+
+}
+
 int CourseModel::getCourseId() const
 {
     return m_courseId;

@@ -94,6 +94,7 @@ public slots:
     void saveTestResults();
     void saveTheoryResults();
 
+    void saveCourse(QString courseName, QString courseDescription);
 signals:
     void nameChanged(QString name);
 
@@ -113,7 +114,7 @@ private:
     User m_author;
     QString m_description;
     double m_rating;
-    int m_courseId;
+    int m_courseId = -1;
 
 
     Test m_tempTest;
