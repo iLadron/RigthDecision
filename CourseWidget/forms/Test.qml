@@ -273,9 +273,7 @@ Rectangle{
                     }
 
                     TestModel.check(arrayRes);
-                    console.log("save");
                     CourseModel.saveTestResults();
-console.log("saved");
                     Form.setWindowState(2)
                 }
             }

@@ -288,6 +288,16 @@ void CourseModel::saveTestResults()
     Database::saveTestResults(m_courseId,marks);
 }
 
+void CourseModel::saveTheoryResults()
+{
+    QString marks = "";
+    for(int i = 0; i < m_theories.size(); i++){
+        marks +=m_theories[i].result()+';';
+    }
+
+    Database::saveTheoryResults(m_courseId,marks);
+}
+
 int CourseModel::getCourseId() const
 {
     return m_courseId;

@@ -92,6 +92,7 @@ public slots:
     void addQuestion(const QString &question, const QStringList &answers, int rightAnswer, QString oldName = "-1");
 
     void saveTestResults();
+    void saveTheoryResults();
 
 signals:
     void nameChanged(QString name);

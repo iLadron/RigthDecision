@@ -165,6 +165,7 @@ Rectangle{
 
 
                     TheoryModel.learned();
+                    CourseModel.saveTheoryResults();
                     Form.setWindowState(2)
                 }
             }

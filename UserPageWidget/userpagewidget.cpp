@@ -89,11 +89,6 @@ void UserPageWidget::refreshCourses()
 
             tempTest.setDateEnd(dateBegin.toString("dd-MM-yyyy"));
 
-
-
-
-
-
             tempModel.addElement(tempTest);
         }
 
@@ -103,12 +98,14 @@ void UserPageWidget::refreshCourses()
 
 
 
-
+        QStringList tempRead = tempCourseInfo.value(tempCourseInfoRec.indexOf("theoryRead")).toString().split(';');
+        int counterRead = 0;
         while(theoryQuery.next()){
 
             TheoryModel tempTheory;
             tempTheory.setType("Теория");
             tempTheory.setDateEnd("Нет");
+            tempTheory.setResult(tempRead[counterRead++]);
             tempTheory.setId(theoryQuery.value(theoryRec.indexOf("id")).toInt());
             tempTheory.setName(theoryQuery.value(theoryRec.indexOf("name")).toString());
             tempTheory.setTheory(theoryQuery.value(theoryRec.indexOf("text")).toString());
@@ -170,11 +167,16 @@ void UserPageWidget::refreshCourses()
 
         QSqlQuery theoryQuery = Database::getTheoryByCourseId(CreatedQuery.value(rec.indexOf("id")).toInt());
         QSqlRecord theoryRec = theoryQuery.record();
+
+
+        QStringList tempRead = tempCourseInfo.value(tempCourseInfoRec.indexOf("theoryRead")).toString().split(';');
+        int counterRead = 0;
         while(theoryQuery.next()){
 
             TheoryModel tempTheory;
             tempTheory.setType("Теория");
             tempTheory.setDateEnd("Нет");
+            tempTheory.setResult(tempRead[counterRead++]);
             tempTheory.setId(theoryQuery.value(theoryRec.indexOf("id")).toInt());
             tempTheory.setName(theoryQuery.value(theoryRec.indexOf("name")).toString());
             tempTheory.setTheory(theoryQuery.value(theoryRec.indexOf("text")).toString());

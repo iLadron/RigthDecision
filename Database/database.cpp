@@ -191,6 +191,16 @@ void Database::saveTestResults(int idCoure, QString answer)
 
 }
 
+void Database::saveTheoryResults(int idCoure, QString answer)
+{
+    QSqlQuery query;
+    QString str;
+    QString strReg = "update UserHasCourse set theoryRead = '%1' WHERE idUser = '%2' AND idCourse = '%3'";
+
+    str = strReg.arg(answer).arg(m_loginedUser->id).arg(idCoure);
+    query.exec(str);
+}
+
 QSqlQuery Database::getCourseInfoByCourseId(int id)
 {
     QSqlQuery query;
