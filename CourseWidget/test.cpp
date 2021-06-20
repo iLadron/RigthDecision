@@ -72,6 +72,16 @@ void Test::check(QList<int> arrayRes)
     endResetModel();
 }
 
+int Test::id() const
+{
+    return m_id;
+}
+
+void Test::setId(int id)
+{
+    m_id = id;
+}
+
 
 
 

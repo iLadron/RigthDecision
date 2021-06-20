@@ -47,6 +47,7 @@ void UserPageWidget::refreshCourses()
 
         CourseModel tempModel;
 
+        tempModel.setCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
 
         User tempAuthor = Database::getUserById(inProgressQuery.value(rec.indexOf("idAuthor")).toInt());
 
@@ -61,12 +62,12 @@ void UserPageWidget::refreshCourses()
 
         QStringList tempMarks = tempCourseInfo.value(tempCourseInfoRec.indexOf("marks")).toString().split(';');
         int counterMarks = 0;
-
         while (tempTestProgress.next()) {
             Test tempTest;
             QStringList questions = tempTestProgress.value(tempRec.indexOf("questions")).toString().split(';');
             QStringList answers = tempTestProgress.value(tempRec.indexOf("answers")).toString().split(';');
             QStringList rightAnswersNumbers = tempTestProgress.value(tempRec.indexOf("rightAnswerNumbers")).toString().split(';');
+            tempTest.setId(tempTestProgress.value(tempRec.indexOf("id")).toInt());
             tempTest.setName(tempTestProgress.value(tempRec.indexOf("name")).toString());
             tempTest.setType("Тест");
             tempTest.setResult(tempMarks[counterMarks++]);
@@ -99,11 +100,16 @@ void UserPageWidget::refreshCourses()
 
         QSqlQuery theoryQuery = Database::getTheoryByCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
         QSqlRecord theoryRec = theoryQuery.record();
+
+
+
+
         while(theoryQuery.next()){
 
             TheoryModel tempTheory;
             tempTheory.setType("Теория");
             tempTheory.setDateEnd("Нет");
+            tempTheory.setId(theoryQuery.value(theoryRec.indexOf("id")).toInt());
             tempTheory.setName(theoryQuery.value(theoryRec.indexOf("name")).toString());
             tempTheory.setTheory(theoryQuery.value(theoryRec.indexOf("text")).toString());
 
@@ -132,15 +138,15 @@ void UserPageWidget::refreshCourses()
     while (CreatedQuery.next()) {
 
         CourseModel tempModel;
-        tempModel.setDateBegin(CreatedQuery.value(rec.indexOf("")).toString());
         User tempAuthor = Database::getUserById(CreatedQuery.value(rec.indexOf("idAuthor")).toInt());
+        tempModel.setCourseId(CreatedQuery.value(rec.indexOf("id")).toInt());
 
 
         QSqlQuery tempTestProgress = Database::getTestsByCourseId(CreatedQuery.value(rec.indexOf("id")).toInt());
         QSqlRecord tempRec = tempTestProgress.record();
 
 
-        QSqlQuery tempCourseInfo = Database::getCourseInfoByCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
+        QSqlQuery tempCourseInfo = Database::getCourseInfoByCourseId(CreatedQuery.value(rec.indexOf("id")).toInt());
         QSqlRecord tempCourseInfoRec = tempCourseInfo.record();
 
         while (tempTestProgress.next()) {
@@ -148,6 +154,7 @@ void UserPageWidget::refreshCourses()
             QStringList questions = tempTestProgress.value(tempRec.indexOf("questions")).toString().split(';');
             QStringList answers = tempTestProgress.value(tempRec.indexOf("answers")).toString().split(';');
             QStringList rightAnswersNumbers = tempTestProgress.value(tempRec.indexOf("rightAnswerNumbers")).toString().split(';');
+            tempTest.setId(tempTestProgress.value(tempRec.indexOf("id")).toInt());
             tempTest.setName(tempTestProgress.value(tempRec.indexOf("name")).toString());
             tempTest.setType("Тест");
             for (int i = 0; i < questions.size();i++){
@@ -161,13 +168,14 @@ void UserPageWidget::refreshCourses()
             tempModel.addElement(tempTest);
         }
 
-        QSqlQuery theoryQuery = Database::getTheoryByCourseId(inProgressQuery.value(rec.indexOf("id")).toInt());
+        QSqlQuery theoryQuery = Database::getTheoryByCourseId(CreatedQuery.value(rec.indexOf("id")).toInt());
         QSqlRecord theoryRec = theoryQuery.record();
         while(theoryQuery.next()){
 
             TheoryModel tempTheory;
             tempTheory.setType("Теория");
             tempTheory.setDateEnd("Нет");
+            tempTheory.setId(theoryQuery.value(theoryRec.indexOf("id")).toInt());
             tempTheory.setName(theoryQuery.value(theoryRec.indexOf("name")).toString());
             tempTheory.setTheory(theoryQuery.value(theoryRec.indexOf("text")).toString());
 

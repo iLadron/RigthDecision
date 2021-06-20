@@ -30,6 +30,16 @@ void TheoryModel::learned()
     emit learnedSignal();
 }
 
+int TheoryModel::id() const
+{
+    return m_id;
+}
+
+void TheoryModel::setId(int id)
+{
+    m_id = id;
+}
+
 void TheoryModel::setTheory(const QString &theory)
 {
     m_theory = theory;

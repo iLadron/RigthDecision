@@ -52,6 +52,8 @@ public:
     static QSqlQuery getTestsByCourseId(int id);
     static QSqlQuery getTheoryByCourseId(int id);
 
+    static void saveTestResults(int idCoure, QString answer);
+
 
     static QSqlQuery getCourseInfoByCourseId(int id);
 

@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QAbstractItemModel>
 #include <QFlags>
+#include <QObject>
 
 #include "test.h"
 #include "theorymodel.h"
@@ -66,6 +67,9 @@ public:
 
     bool getIsCreator() const;
 
+    int getCourseId() const;
+    void setCourseId(int courseId);
+
 public slots:
     QString getData();
 
@@ -86,6 +90,8 @@ public slots:
     void saveTheory(QString name, QString theory, QString oldName);
 
     void addQuestion(const QString &question, const QStringList &answers, int rightAnswer, QString oldName = "-1");
+
+    void saveTestResults();
 
 signals:
     void nameChanged(QString name);

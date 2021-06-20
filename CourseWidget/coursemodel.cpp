@@ -2,6 +2,7 @@
 
 CourseModel::CourseModel()
 {
+
 }
 
 CourseModel::CourseModel(const CourseModel &model)
@@ -275,6 +276,26 @@ void CourseModel::addQuestion(const QString &question, const QStringList &answer
         }
     }
     m_tempTest.addQuestion(question, answers, rightAnswer);
+}
+
+void CourseModel::saveTestResults()
+{
+    QString marks = "";
+    for(int i = 0; i < m_tests.size(); i++){
+        marks +=m_tests[i].result()+';';
+    }
+
+    Database::saveTestResults(m_courseId,marks);
+}
+
+int CourseModel::getCourseId() const
+{
+    return m_courseId;
+}
+
+void CourseModel::setCourseId(int courseId)
+{
+    m_courseId = courseId;
 }
 
 bool CourseModel::getIsCreator() const

@@ -95,6 +95,8 @@ Rectangle{
                 hoverEnabled: true
                 onClicked: {
                     console.log("Создать теорию")
+                    Form.openLK();
+
                 }
             }
         }

@@ -180,6 +180,17 @@ QSqlQuery Database::getTheoryByCourseId(int id)
     return query;
 }
 
+void Database::saveTestResults(int idCoure, QString answer)
+{
+    QSqlQuery query;
+    QString str;
+    QString strReg = "update UserHasCourse set marks = '%1' WHERE idUser = '%2' AND idCourse = '%3'";
+
+    str = strReg.arg(answer).arg(m_loginedUser->id).arg(idCoure);
+    query.exec(str);
+
+}
+
 QSqlQuery Database::getCourseInfoByCourseId(int id)
 {
     QSqlQuery query;

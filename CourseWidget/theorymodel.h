@@ -21,6 +21,9 @@ public:
 
     void setTheory(const QString &theory);
 
+    int id() const;
+    void setId(int id);
+
 public slots:
     QString theory() const;
     void learned();
@@ -31,6 +34,7 @@ signals:
 private:
 
     QString m_theory;
+    int m_id;
 };
 
 #endif // THEORYMODEL_H

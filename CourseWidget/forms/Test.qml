@@ -273,6 +273,9 @@ Rectangle{
                     }
 
                     TestModel.check(arrayRes);
+                    console.log("save");
+                    CourseModel.saveTestResults();
+console.log("saved");
                     Form.setWindowState(2)
                 }
             }
@@ -350,7 +353,6 @@ Rectangle{
                 columns: 2
                 RadioButton {
                     id:rb1Temp
-                    checked: true
                 }
                 TextField{
                     id:ans1Temp
@@ -365,6 +367,7 @@ Rectangle{
                 }
 
                 RadioButton {
+                    id:rb2Temp
                 }
                 TextField{
                     id:ans2Temp
@@ -380,6 +383,7 @@ Rectangle{
 
 
                 RadioButton {
+                    id:rb3Temp
                 }
                 TextField{
                     id:ans3Temp
@@ -394,6 +398,7 @@ Rectangle{
                 }
 
                 RadioButton {
+                    id:rb4Temp
                 }
                 TextField{
                     id:ans4Temp
@@ -450,8 +455,18 @@ Rectangle{
                         onClicked: {
                             //TODO: Add Question Logic
 
+                            var arrayRes = new Array;
 
-                            CourseModel.addQuestion(question.text, [ans1Temp.text, ans2Temp.text, ans3Temp.text,ans4Temp.text],2,TestName)
+                            if(rb1Temp.checked){
+                                CourseModel.addQuestion(question.text, [ans1Temp.text, ans2Temp.text, ans3Temp.text,ans4Temp.text],1,TestName)
+                            }else if(rb2Temp.checked){
+                                CourseModel.addQuestion(question.text, [ans1Temp.text, ans2Temp.text, ans3Temp.text,ans4Temp.text],2,TestName)
+                            }else if(rb3Temp.checked){
+                                CourseModel.addQuestion(question.text, [ans1Temp.text, ans2Temp.text, ans3Temp.text,ans4Temp.text],3,TestName)
+                            }else if(rb4Temp.checked){
+                                CourseModel.addQuestion(question.text, [ans1Temp.text, ans2Temp.text, ans3Temp.text,ans4Temp.text],4,TestName)
+                            }
+
                             addQuestion.visible = false
                         }
                     }

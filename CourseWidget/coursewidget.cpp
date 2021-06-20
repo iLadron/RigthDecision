@@ -18,6 +18,8 @@ CourseWidget::CourseWidget(QWidget *pwgt) : QWidget(pwgt)
     setLayout(m_mainLayout);
 
 
+
+
 }
 
 int CourseWidget::windowState() const

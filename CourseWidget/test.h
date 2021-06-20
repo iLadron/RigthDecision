@@ -11,7 +11,6 @@
 #include <math.h>
 
 
-
 #include "courseelement.h"
 #include <QObject>
 
@@ -46,14 +45,20 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+    int id() const;
+    void setId(int id);
+
 public slots:
-     void addQuestion(const QString& question, const QStringList& answers, int rightAnswer);
+    void addQuestion(const QString& question, const QStringList& answers, int rightAnswer);
      void check(QList<int> arrayRes);
 
-
+signals:
+     void saveTest();
 
 private:
     std::vector<Question> m_questions;
+    int m_id;
+    //CourseModel* m_model;
 
 };
 
